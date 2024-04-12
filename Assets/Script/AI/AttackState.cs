@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "A.I/States/Idle")]
-public class IdleState : AIState
+[CreateAssetMenu(menuName = "A.I/States/Attack")]
+public class AttackState : AIState
 {
     public override AIState Tick(AICharacterManager aiCharacterManager)
     {
-        Debug.Log("Idle State");
+        Debug.Log("Attack State");
+        // HANDLE ATTACK
         aiCharacterManager._controlAnimator.moveAmount = 0;
-        aiCharacterManager._controlMovement.HandleAIAggroRange(aiCharacterManager.SwitchStateTo, 
-            aiCharacterManager.stateList);
         return base.Tick(aiCharacterManager);
     }
 }

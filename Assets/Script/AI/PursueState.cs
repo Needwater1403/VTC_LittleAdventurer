@@ -13,11 +13,5 @@ public class PursueState : AIState
         aiCharacterManager._controlMovement.HandleAIPursueMovement(aiCharacterManager.SwitchStateTo, 
             aiCharacterManager.stateList);
         return base.Tick(aiCharacterManager);
-        // else
-        // {
-        //     Debug.Log("Pursue State -> IdLE");
-        //     aiCharacterManager._controlMovement.a = true;
-        //     return aiCharacterManager.stateList[0].Tick(aiCharacterManager);
-        // }
     }
 }

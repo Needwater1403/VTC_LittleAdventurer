@@ -15,7 +15,7 @@ public class AICharacterManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        currentState = stateList[1];
+        currentState = stateList[0];
     }
     protected override void FixedUpdate()
     {

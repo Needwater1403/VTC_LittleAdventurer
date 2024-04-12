@@ -7,6 +7,7 @@ public class AICharacterControlMovement : CharacterControlMovement
 {
     private UnityEngine.AI.NavMeshAgent _navMeshAgent;
     private Transform targetTf;
+    public float aggroRange = 10;
     protected override void Awake()
     {
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -21,7 +22,14 @@ public class AICharacterControlMovement : CharacterControlMovement
         }
         else
         {
-            _test?.Invoke(_list[0]);
+            _test?.Invoke(_list[2]);
+        }
+    }
+    public void HandleAIAggroRange(Action<AIState> _test, List<AIState> _list)
+    {
+        if(Vector3.Distance(targetTf.position, transform.position) <= aggroRange)
+        {
+            _test?.Invoke(_list[1]);
         }
     }
 }
