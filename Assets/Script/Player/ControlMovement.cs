@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ControlMovement : CharacterControlMovement
@@ -14,9 +15,9 @@ public class ControlMovement : CharacterControlMovement
     private Vector3 moveDir;
     private Vector3 rotationDir;
     private float velocityY;
-
-    public bool isPlayer = false;
-
+    private bool canMove;
+    
+    
     [SerializeField] private ConfigMovementSO configMovement;
     protected override void Awake()
     {
@@ -28,15 +29,18 @@ public class ControlMovement : CharacterControlMovement
     {
         moveValue = ReceiveInput.Instance.movementInputValue;
     }
+    private void GetAttackInputValue()
+    {
+        canMove = ReceiveInput.Instance.canMove;
+    }
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {
-        if(isPlayer)
-        {
-            //Grounded movement handle
-            HandleGroundMovement();
-            //Rotation handle
-            HandleRotation();
-        }
+        GetAttackInputValue();
+        if (!canMove) return;
+        //Grounded movement handle
+        HandleGroundMovement();
+        //Rotation handle
+        HandleRotation();
     }
 
     

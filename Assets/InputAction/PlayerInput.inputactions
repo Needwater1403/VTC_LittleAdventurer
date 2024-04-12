@@ -1,5 +1,5 @@
 {
-    "name": "low_poly_action",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -30,7 +30,7 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Special Attack",

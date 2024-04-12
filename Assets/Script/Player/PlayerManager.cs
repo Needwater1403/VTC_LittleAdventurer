@@ -24,6 +24,10 @@ public class PlayerManager : CharacterManager
         {
             _controlAnimator.HandleAllAnimation();
         }
+        if (_controlCombat)
+        {
+            _controlCombat.HandleAllCombat();
+        }
     }
     // protected override void LateUpdate()
     // {

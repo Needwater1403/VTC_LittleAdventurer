@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlCombat : MonoBehaviour
+public class ControlCombat : CharacterControlCombat
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool isAttacking;
+    protected override void Awake()
     {
-        
+        base.Awake();
+    }
+    private void GetAttackInputValue()
+    {
+        isAttacking = ReceiveInput.Instance.isAttacking;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HandleAllCombat()
     {
-        
+        GetAttackInputValue();
+        if (isAttacking)
+        {
+            //
+        }
     }
 }

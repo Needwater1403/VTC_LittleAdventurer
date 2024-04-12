@@ -8,19 +8,27 @@ using UnityEngine.VFX;
 public class ControlAnimator : CharacterControlAnimator
 {
     private float moveAmount;
+    private bool isAttacking;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
-
+    [SerializeField] private ParticleSystem VFX_sword1;
     private void GetMovementInputValue()
     {
         moveAmount = ReceiveInput.Instance.moveAmount;
     }
+    private void GetAttackInputValue()
+    {
+        isAttacking = ReceiveInput.Instance.isAttacking;
+    }
     public void HandleAllAnimation()
     {
         GetMovementInputValue();
-        UpdateAnimation(0,moveAmount);
+        GetAttackInputValue();
+        UpdateAnimation(0,moveAmount, isAttacking);
         UpdateVFX();
     }
+
+    #region VFX
 
     private void UpdateVFX()
     {
@@ -33,9 +41,23 @@ public class ControlAnimator : CharacterControlAnimator
             VFX_footStep.Stop();
         }
     }
+
+    private void PlaySword1VFX()
+    {
+        VFX_sword1.Play();
+    }
+
+    #endregion
+    
+    
+    private void EndATK()
+    {
+        ReceiveInput.Instance.canMove = true;
+    }
     protected override void Awake()
     {
         base.Awake();
     }
+    
 }
 

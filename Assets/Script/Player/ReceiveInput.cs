@@ -13,7 +13,8 @@ public class ReceiveInput : MonoBehaviour
     public Vector2 movementInputValue;
     public Vector2 lookInputValue;
     public float moveAmount;
-
+    public bool isAttacking = false;
+    public bool canMove = true;
     private void Awake()
     {
         playerManager = GetComponent<PlayerManager>();
@@ -33,9 +34,10 @@ public class ReceiveInput : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext _context)
     {
-        movementInputValue  = _context.ReadValue<Vector2>();
+        if (!canMove) return;
+        movementInputValue = _context.ReadValue<Vector2>();
         moveAmount = Mathf.Clamp01(Mathf.Abs(movementInputValue.x) + Mathf.Abs((movementInputValue.y)));
-        
+
         //CHANGE BETWEEN WALK AND RUN ANIMATION
         switch (moveAmount)
         {
@@ -52,5 +54,19 @@ public class ReceiveInput : MonoBehaviour
     {
         lookInputValue  = _context.ReadValue<Vector2>();
     }
-    
+
+    public void OnAttack(InputAction.CallbackContext _context)
+    {
+        switch (_context.phase)
+        {
+            case InputActionPhase.Started:
+                isAttacking = true;
+                canMove = false;
+                Debug.Log("two");
+                break;
+            case InputActionPhase.Canceled:
+                isAttacking  = false;
+                break;
+        }
+    }
 }

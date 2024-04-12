@@ -32,4 +32,5 @@ public class AICharacterControlMovement : CharacterControlMovement
             _test?.Invoke(_list[1]);
         }
     }
+    
 }

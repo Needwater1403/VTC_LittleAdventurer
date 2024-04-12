@@ -7,7 +7,7 @@ public class IdleState : AIState
 {
     public override AIState Tick(AICharacterManager aiCharacterManager)
     {
-        Debug.Log("Idle State");
+        Debug.LogError("Idle State");
         aiCharacterManager._controlAnimator.moveAmount = 0;
         aiCharacterManager._controlMovement.HandleAIAggroRange(aiCharacterManager.SwitchStateTo, 
             aiCharacterManager.stateList);
