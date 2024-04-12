@@ -7,14 +7,12 @@ public class PursueState : AIState
 {
     public override AIState Tick(AICharacterManager aiCharacterManager)
     {
-        Debug.LogError(aiCharacterManager._controlAnimator.canMove);
         if (aiCharacterManager._controlAnimator.canMove)
         {
             aiCharacterManager._controlAnimator.moveAmount = 1;
             //aiCharacterManager._controlAnimator.HandleAllAnimation(0);
             aiCharacterManager._controlMovement.HandleAIPursueMovement(aiCharacterManager.SwitchStateTo,
                 aiCharacterManager.stateList);
-            
         }
         return base.Tick(aiCharacterManager);
     }

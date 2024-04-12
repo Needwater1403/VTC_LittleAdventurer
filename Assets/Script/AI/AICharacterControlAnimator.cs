@@ -12,17 +12,11 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     public bool canMove;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
-
     [SerializeField] private VisualEffect VFX_attack;
-
+    [SerializeField] private VisualEffect VFX_heal;
     public void HandleAllAnimation()
     {
         AIUpdateAnimation(0,moveAmount, isAttacking);
-        if (isAttacking)
-        {
-            isAttacking = false;
-            canMove = false;
-        }
     }
 
     private void FootStepBurstParticle()
@@ -34,12 +28,11 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     {
         VFX_attack.Play();
     }
-    
-    private void AttackParticleEnd()
+    private void NewEvent()
     {
-        Debug.LogError("DMM");
-        canMove = true;
+        VFX_attack.Play();
     }
+    
     protected override void Awake()
     {
         base.Awake();

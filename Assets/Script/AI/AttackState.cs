@@ -7,18 +7,21 @@ public class AttackState : AIState
 {
     public override AIState Tick(AICharacterManager aiCharacterManager)
     {
+        
+        if(!aiCharacterManager._controlAnimator.canMove)
+        {
+            aiCharacterManager._controlMovement.HandleAIAttackRange(aiCharacterManager.SwitchStateTo,
+                aiCharacterManager.stateList);
+        }
         Debug.Log("Attack State");
         // HANDLE ATTACK ANIMATION
-        aiCharacterManager._controlAnimator.moveAmount = 0;
-        aiCharacterManager._controlAnimator.isAttacking = true;
+        if(!aiCharacterManager._controlAnimator.isAttacking && aiCharacterManager._controlAnimator.canMove)
+        {
+            aiCharacterManager._controlAnimator.isAttacking = true;
+        }
         // HANDLE ATTACK (CONTROL COMBAT SCRIPT)
         //
         //SWITCH TO PURSUE STATE
-        if(!aiCharacterManager._controlAnimator.canMove)
-        {
-            aiCharacterManager._controlMovement.HandleAIAggroRange(aiCharacterManager.SwitchStateTo,
-                aiCharacterManager.stateList);
-        }
         return base.Tick(aiCharacterManager);
     }
 }

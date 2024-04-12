@@ -38,6 +38,7 @@ public class AICharacterManager : CharacterManager
     public void SwitchStateTo(AIState _state)
     {
         currentState = _state;
+        ProcessState();
         Debug.LogError("CurrentState: " + currentState);
     }
 }
