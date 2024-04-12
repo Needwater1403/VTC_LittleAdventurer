@@ -7,7 +7,7 @@ using UnityEngine.VFX;
 
 public class AICharacterControlAnimator : CharacterControlAnimator
 {
-    [HideInInspector] public float moveAmount;
+     public float moveAmount;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
 
@@ -15,19 +15,12 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     public void HandleAllAnimation() 
     {
         AIUpdateAnimation(0,moveAmount);
-        UpdateVFX();
+
     }
 
-    private void UpdateVFX()
+    private void FootStepBurstParticle()
     {
-        if (moveAmount != 0)
-        {
-            VFX_footStep.Play();
-        }
-        else
-        {
-            VFX_footStep.Stop();
-        }
+        VFX_footStep.Play();
     }
     protected override void Awake()
     {
