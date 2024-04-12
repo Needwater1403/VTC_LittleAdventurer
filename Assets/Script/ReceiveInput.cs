@@ -46,8 +46,6 @@ public class ReceiveInput : MonoBehaviour
                 moveAmount = 1;
                 break;
         }
-        // VeloX = 0 BECAUSE THIS IS NOT LOCK-ON
-        playerManager._controlAnimator.UpdateAnimation(0,moveAmount);
     }
     
     public void OnLook(InputAction.CallbackContext _context)

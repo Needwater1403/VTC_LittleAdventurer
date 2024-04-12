@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f8f5f56cfbd55146a4f31895cf75bd6, type: 3}
-  m_Name: MovementSO_01
+  m_Script: {fileID: 11500000, guid: 9a4b0c65715ed4443b970cba27134673, type: 3}
+  m_Name: Idle State
   m_EditorClassIdentifier: 
-  walkSpeed: 3
-  runSpeed: 5.5
-  jumpForce: 3
-  rotationSpeed: 50
-  gravity: -20

@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class CharacterManager : MonoBehaviour
 {
-    public CharacterController _characterController;
-    public Animator _animator;
+    [HideInInspector] public CharacterController _characterController;
+    [HideInInspector] public Animator _animator;
+    // [HideInInspector] public CharacterControlMovement _controlMovement;
+    // [HideInInspector] public CharacterControlAnimator _controlAnimator;
+    //[SerializeField] public CharacterControlCombat _controlCombat;
     protected virtual void Awake()
     {
-        DontDestroyOnLoad(this);
         _characterController = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
     }
@@ -18,7 +20,11 @@ public class CharacterManager : MonoBehaviour
     {
 
     }
-    protected virtual void LateUpdate()
+    // protected virtual void LateUpdate()
+    // {
+    //
+    // }
+    protected virtual void FixedUpdate()
     {
 
     }

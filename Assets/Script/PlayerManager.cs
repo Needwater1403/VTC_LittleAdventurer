@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    [SerializeField] private ControlMovement _controlMovement;
-    [SerializeField] public ControlAnimator _controlAnimator;
-    [SerializeField] private ControlCombat _controlCombat;
+    [SerializeField] protected ControlMovement _controlMovement;
+    [SerializeField] protected ControlAnimator _controlAnimator;
+    [SerializeField] protected ControlCombat _controlCombat;
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(this);
     }
 
     protected override void Update()
@@ -19,10 +20,14 @@ public class PlayerManager : CharacterManager
         {
             _controlMovement.HandleAllMovement();
         }
+        if (_controlAnimator)
+        {
+            _controlAnimator.HandleAllAnimation();
+        }
     }
-    protected override void LateUpdate()
-    {
-        base.LateUpdate();
-        //PlayerCamera.Instance.HandleCamera();
-    }
+    // protected override void LateUpdate()
+    // {
+    //     base.LateUpdate();
+    //     PlayerCamera.Instance.HandleCamera();
+    // }
 }

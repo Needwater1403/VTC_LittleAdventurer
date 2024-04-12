@@ -5,20 +5,16 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ControlAnimator : CharacterControlAnimator
+public class AICharacterControlAnimator : CharacterControlAnimator
 {
-    private float moveAmount;
+    [HideInInspector] public float moveAmount;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
 
-    private void GetMovementInputValue()
+
+    public void HandleAllAnimation() 
     {
-        moveAmount = ReceiveInput.Instance.moveAmount;
-    }
-    public void HandleAllAnimation()
-    {
-        GetMovementInputValue();
-        UpdateAnimation(0,moveAmount);
+        AIUpdateAnimation(0,moveAmount);
         UpdateVFX();
     }
 
@@ -38,4 +34,3 @@ public class ControlAnimator : CharacterControlAnimator
         base.Awake();
     }
 }
-

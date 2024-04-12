@@ -14,7 +14,8 @@ public class ControlMovement : CharacterControlMovement
     private Vector3 moveDir;
     private Vector3 rotationDir;
     private float velocityY;
-    private static float gravity = -9.8f;
+
+    public bool isPlayer = false;
 
     [SerializeField] private ConfigMovementSO configMovement;
     protected override void Awake()
@@ -23,30 +24,22 @@ public class ControlMovement : CharacterControlMovement
         _playerManager = GetComponent<PlayerManager>();
     }
 
-    public void Move(Vector2 _vector2)
-    {
-        var _current = tf.position;
-        var _new = new Vector3(_current.x + _vector2.x, _current.y, _current.z + _vector2.y);
-        tf.position = Vector3.Lerp(_current, _new, configMovement.walkSpeed * Time.deltaTime);
-        if (_vector2.x != 0 || _vector2.y != 0)
-        {
-            //tf.rotation = Quaternion.Euler(0f, (float)(System.Math.Atan2((_vector2.x - 0), (_vector2.y - 0)) * 180 / 3.14), 0f);
-        }
-    }
-
-    public void GetMovementInputValue()
+    private void GetMovementInputValue()
     {
         moveValue = ReceiveInput.Instance.movementInputValue;
     }
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {
-        //Grounded movement handle
-        HandleGroundMovement();
-        //Aerial movement handle
-        //Rotation handle
-        HandleRotation();
+        if(isPlayer)
+        {
+            //Grounded movement handle
+            HandleGroundMovement();
+            //Rotation handle
+            HandleRotation();
+        }
     }
 
+    
     private void HandleGroundMovement()
     {
         GetMovementInputValue();
@@ -54,23 +47,23 @@ public class ControlMovement : CharacterControlMovement
         moveDir.Normalize();
         moveDir = Quaternion.Euler(0, -45f, 0) * moveDir;
         moveDir.y = 0;
-
-        //------------HANDLE GRAVITY------------
-        velocityY = !_playerManager._characterController.isGrounded ? gravity : gravity * 0.3f;
-        moveDir += velocityY * Vector3.up;
         
         //-----------------MOVE-----------------
         if (ReceiveInput.Instance.moveAmount <= 0.5f)
         {
-            _playerManager._characterController.Move(moveDir * (configMovement.walkSpeed * Time.deltaTime));
+            moveDir *= configMovement.walkSpeed;
         }
         else if (ReceiveInput.Instance.moveAmount <= 1)
         {
-            _playerManager._characterController.Move(moveDir * (configMovement.runSpeed * Time.deltaTime));
+            moveDir *= configMovement.runSpeed;
         }
-
         
+        //------------HANDLE GRAVITY------------
+        velocityY = !_playerManager._characterController.isGrounded ? configMovement.gravity : configMovement.gravity * 0.3f;
+        moveDir += velocityY * Vector3.up;
+        _playerManager._characterController.Move(moveDir * Time.deltaTime);
     }
+    
 
     private void HandleRotation()
     {
