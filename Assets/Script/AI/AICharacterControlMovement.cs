@@ -35,7 +35,7 @@ public class AICharacterControlMovement : CharacterControlMovement
     }
     public void HandleAIAttackRange(Action<AIState> _test, List<AIState> _list)
     {
-        if(Vector3.Distance(targetTf.position, transform.position) >= attackRange)
+        if(Vector3.Distance(targetTf.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
             _test?.Invoke(_list[1]);
         }

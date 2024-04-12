@@ -377,6 +377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 121403859}
   _animator: {fileID: 0}
+  _controlCombat: {fileID: 121403863}
   _controlMovement: {fileID: 121403865}
   _controlAnimator: {fileID: 121403864}
   _controlCombat: {fileID: 121403863}
@@ -2565,12 +2566,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1338360019}
+  - component: {fileID: 1338360026}
   - component: {fileID: 1338360020}
   - component: {fileID: 1338360025}
   - component: {fileID: 1338360022}
   - component: {fileID: 1338360023}
   - component: {fileID: 1338360024}
-  - component: {fileID: 1338360026}
+  - component: {fileID: 1338360027}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2635,6 +2637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 0}
   _animator: {fileID: 0}
+  _controlCombat: {fileID: 0}
   _controlAnimator: {fileID: 1338360023}
   _controlMovement: {fileID: 1338360024}
   currentState: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
@@ -2717,6 +2720,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1338360027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338360018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8dcab47dcc58d743951313501e76c06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1362015798
 PrefabInstance:
   m_ObjectHideFlags: 0

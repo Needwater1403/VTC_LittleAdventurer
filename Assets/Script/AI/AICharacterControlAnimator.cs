@@ -28,10 +28,6 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     {
         VFX_attack.Play();
     }
-    private void NewEvent()
-    {
-        VFX_attack.Play();
-    }
     
     protected override void Awake()
     {

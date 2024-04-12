@@ -27,8 +27,7 @@ public class CharacterControlAnimator : MonoBehaviour
     protected void AIUpdateAnimation(float veloX, float veloY, bool isAttacking = false)
     {
         if (isAttacking)
-        {
-            Debug.LogError("FuckMePlease");
+        {    
             _characterManager._animator.SetTrigger(Attack);
         }
         else

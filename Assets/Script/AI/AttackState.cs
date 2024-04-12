@@ -13,7 +13,6 @@ public class AttackState : AIState
             aiCharacterManager._controlMovement.HandleAIAttackRange(aiCharacterManager.SwitchStateTo,
                 aiCharacterManager.stateList);
         }
-        Debug.Log("Attack State");
         // HANDLE ATTACK ANIMATION
         if(!aiCharacterManager._controlAnimator.isAttacking && aiCharacterManager._controlAnimator.canMove)
         {

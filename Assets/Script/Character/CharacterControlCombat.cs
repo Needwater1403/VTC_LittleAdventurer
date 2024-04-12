@@ -8,4 +8,9 @@ public class CharacterControlCombat : MonoBehaviour
     {
         
     }
+
+    protected virtual void InflictDamage()
+    {
+        Debug.LogError("InflictDamage");
+    }
 }
