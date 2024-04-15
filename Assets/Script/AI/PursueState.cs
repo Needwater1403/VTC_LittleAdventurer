@@ -10,7 +10,6 @@ public class PursueState : AIState
         if (aiCharacterManager._controlAnimator.canMove)
         {
             aiCharacterManager._controlAnimator.moveAmount = 1;
-            //aiCharacterManager._controlAnimator.HandleAllAnimation(0);
             aiCharacterManager._controlMovement.HandleAIPursueMovement(aiCharacterManager.SwitchStateTo,
                 aiCharacterManager.stateList);
         }

@@ -15,7 +15,7 @@ public class DamageCollider : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(_controlCombat.health.configCombat.normalATK);
-                Debug.LogError($"{health.gameObject.tag} Current HP: {health.CurrentHp}" );
+                Debug.Log($"{health.gameObject.tag} Current HP: {health.CurrentHp}" );
             }
             _controlCombat.targetList.Add(other);
         }

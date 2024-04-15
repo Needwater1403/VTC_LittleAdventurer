@@ -19,10 +19,14 @@ public class CharacterControlCombat : MonoBehaviour
     {
         SetCollider(true);
     }
-    protected virtual void Test()
+    protected virtual void ResetTargetList()
     {
         targetList.Clear();
         SetCollider();
+    }
+    protected virtual void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 
     private void SetCollider(bool status = false)

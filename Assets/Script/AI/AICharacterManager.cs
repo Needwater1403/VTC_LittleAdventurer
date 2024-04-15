@@ -11,7 +11,14 @@ public class AICharacterManager : CharacterManager
     [SerializeField] private AIState currentState;
     [Title("State List")] 
     public List<AIState> stateList;
-    
+
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get => isDead;
+        set => isDead = value;
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,7 +26,12 @@ public class AICharacterManager : CharacterManager
     }
     protected override void FixedUpdate()
     {
+        if(isDead) return;
         base.FixedUpdate();
+        if (_controlCombat.health.CurrentHp <= 0)
+        {
+            SwitchStateTo(stateList[3]);
+        }
         ProcessState();
     }
     protected override void Update()
@@ -39,6 +51,6 @@ public class AICharacterManager : CharacterManager
     {
         currentState = _state;
         ProcessState();
-        Debug.LogError("CurrentState: " + currentState);
+        Debug.Log("CurrentState: " + currentState);
     }
 }

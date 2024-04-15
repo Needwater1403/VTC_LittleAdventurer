@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 121403859}
   _animator: {fileID: 0}
+  _ControlCombat: {fileID: 0}
   _controlMovement: {fileID: 121403865}
   _controlAnimator: {fileID: 121403864}
   _controlCombat: {fileID: 0}
@@ -2720,6 +2721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterController: {fileID: 0}
   _animator: {fileID: 0}
+  _ControlCombat: {fileID: 0}
   _controlAnimator: {fileID: 1338360023}
   _controlMovement: {fileID: 1338360024}
   currentState: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
@@ -2727,6 +2729,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
   - {fileID: 11400000, guid: 32bf6c87293f1654dbdcbcfb2cd29515, type: 2}
   - {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
+  - {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
 --- !u!114 &1338360023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2742,6 +2745,7 @@ MonoBehaviour:
   moveAmount: 0
   isAttacking: 0
   canMove: 0
+  isDead: 0
   VFX_footStep: {fileID: 1667858718}
   VFX_attack: {fileID: 344942020}
   VFX_heal: {fileID: 204144014}

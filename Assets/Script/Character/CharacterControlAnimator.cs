@@ -10,6 +10,7 @@ public class CharacterControlAnimator : MonoBehaviour
     private static readonly int VelocityZ = Animator.StringToHash("velocityZ");
     private static readonly int isFall = Animator.StringToHash("isFall");
     private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int isDead = Animator.StringToHash("isDead");
     protected virtual void Awake()
     {
         _characterManager = GetComponent<CharacterManager>();
@@ -24,14 +25,19 @@ public class CharacterControlAnimator : MonoBehaviour
         ReceiveInput.Instance.isAttacking = false;
         _characterManager._animator.SetTrigger(Attack);
     }
-    protected void AIUpdateAnimation(float veloX, float veloY, bool isAttacking = false)
+    protected void AIUpdateAnimation(float veloX, float veloY, bool _isDead, bool isAttacking = false)
     {
-        if (isAttacking)
+        if (_isDead)
         {    
+            _characterManager._animator.SetTrigger(isDead);
+        }
+        else if (isAttacking)
+        {
             _characterManager._animator.SetTrigger(Attack);
         }
         else
         {
+            //_characterManager._animator.SetBool(Attack, isAttacking);
             _characterManager._animator.SetFloat(VelocityX, veloX);
             _characterManager._animator.SetFloat(VelocityZ, veloY);
             _characterManager._animator.SetBool(isFall, _characterManager._characterController.isGrounded);

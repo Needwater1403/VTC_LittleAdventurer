@@ -8,15 +8,15 @@ using UnityEngine.VFX;
 public class AICharacterControlAnimator : CharacterControlAnimator
 {
     public float moveAmount;
-    public bool isAttacking = false;
+    public bool isAttacking;
     public bool canMove;
+    public bool isDead;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
-    [SerializeField] private VisualEffect VFX_attack;
-    [SerializeField] private VisualEffect VFX_heal;
+    [SerializeField] private VisualEffect VFX_attack; 
     public void HandleAllAnimation()
     {
-        AIUpdateAnimation(0,moveAmount, isAttacking);
+        AIUpdateAnimation(0,moveAmount, isDead, isAttacking);
     }
 
     private void FootStepBurstParticle()
@@ -34,5 +34,6 @@ public class AICharacterControlAnimator : CharacterControlAnimator
         base.Awake();
         canMove = true;
         isAttacking = false;
+        isDead = false;
     }
 }
