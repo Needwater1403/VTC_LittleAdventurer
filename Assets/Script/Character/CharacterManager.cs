@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour
 {
     [HideInInspector] public CharacterController _characterController;
     [HideInInspector] public Animator _animator;
-    [FormerlySerializedAs("_ControlCombat")] [HideInInspector] public CharacterControlCombat _controlCombat;
+    protected CharacterControlCombat _controlCombat;
     // [HideInInspector] public CharacterControlAnimator _controlAnimator;
     protected virtual void Awake()
     {
