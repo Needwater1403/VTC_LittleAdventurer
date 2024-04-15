@@ -8,4 +8,6 @@ public class ConfigMovementSO : ScriptableObject
     public float jumpForce;
     public float rotationSpeed;
     public float gravity;
+    public float slideDuration;
+    public float slideSpeed;
 }

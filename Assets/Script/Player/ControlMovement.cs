@@ -16,7 +16,8 @@ public class ControlMovement : CharacterControlMovement
     private Vector3 rotationDir;
     private float velocityY;
     private bool canMove;
-    
+    private float atkStartTime = 0;
+
     
     [SerializeField] private ConfigMovementSO configMovement;
     protected override void Awake()
@@ -36,7 +37,11 @@ public class ControlMovement : CharacterControlMovement
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {
         GetAttackInputValue();
-        if (!canMove) return;
+        if (!canMove)
+        {
+            SlideWhenAttack();
+            return;
+        }
         //Grounded movement handle
         HandleGroundMovement();
         //Rotation handle
@@ -47,6 +52,7 @@ public class ControlMovement : CharacterControlMovement
     private void HandleGroundMovement()
     {
         GetMovementInputValue();
+        atkStartTime = 0;
         moveDir.Set(moveValue.x,0,moveValue.y);
         moveDir.Normalize();
         moveDir = Quaternion.Euler(0, -45f, 0) * moveDir;
@@ -83,5 +89,20 @@ public class ControlMovement : CharacterControlMovement
         var newDir = Quaternion.LookRotation(rotationDir);
         var camDir = Quaternion.Slerp(transform.rotation, newDir, configMovement.rotationSpeed * Time.deltaTime);
         transform.rotation = camDir;
+    }
+
+    private void SlideWhenAttack()
+    {
+        if (atkStartTime != 0) return;
+        atkStartTime = Time.time;
+        moveDir = Vector3.zero;
+        if(Time.time < atkStartTime + configMovement.slideDuration)
+        {
+            var time = Time.time - atkStartTime;
+            var lerpTime = time / configMovement.slideDuration;
+            moveDir = Vector3.Lerp(transform.forward * configMovement.slideSpeed, Vector3.zero, lerpTime);
+            moveDir += velocityY * Vector3.up;
+            _playerManager._characterController.Move(moveDir);
+        }
     }
 }
