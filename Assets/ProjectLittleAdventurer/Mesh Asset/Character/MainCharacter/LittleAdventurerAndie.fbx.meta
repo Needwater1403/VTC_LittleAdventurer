@@ -121,15 +121,29 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.83192587
-        functionName: EndATK
+      - time: 0.10757717
+        functionName: PlaySword1VFX
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.10757717
-        functionName: PlaySword1VFX
+      - time: 0.11791383
+        functionName: InflictDamage
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.67164546
+        functionName: Test
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.83192587
+        functionName: EndATK
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

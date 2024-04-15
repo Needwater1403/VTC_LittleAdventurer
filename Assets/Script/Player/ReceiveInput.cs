@@ -9,7 +9,6 @@ public class ReceiveInput : MonoBehaviour
 {
     public static ReceiveInput Instance;
     [HideInInspector] public PlayerManager playerManager;
-    [FormerlySerializedAs("inputValue")] 
     public Vector2 movementInputValue;
     public Vector2 lookInputValue;
     public float moveAmount;
@@ -62,7 +61,6 @@ public class ReceiveInput : MonoBehaviour
             case InputActionPhase.Started:
                 isAttacking = true;
                 canMove = false;
-                Debug.Log("two");
                 break;
             case InputActionPhase.Canceled:
                 isAttacking  = false;

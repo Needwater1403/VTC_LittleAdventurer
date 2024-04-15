@@ -19,7 +19,8 @@ public class ControlCombat : CharacterControlCombat
         GetAttackInputValue();
         if (isAttacking)
         {
-            //
+            //InflictDamage();
         }
     }
+    
 }
