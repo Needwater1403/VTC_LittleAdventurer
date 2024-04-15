@@ -13,7 +13,8 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     public bool isDead;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
-    [SerializeField] private VisualEffect VFX_attack; 
+    [SerializeField] private VisualEffect VFX_attack;
+    [SerializeField] private ParticleSystem VFX_BeingHit;
     public void HandleAllAnimation()
     {
         AIUpdateAnimation(0,moveAmount, isDead, isAttacking);
@@ -27,6 +28,15 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     private void AttackParticle()
     {
         VFX_attack.Play();
+    }
+
+    public void BeingHitVFX(Vector3 _playerPos)
+    {
+        var dir = transform.position - _playerPos;
+        dir.Normalize();
+        dir.y = 0;
+        VFX_BeingHit.transform.rotation = Quaternion.LookRotation(dir);
+        VFX_BeingHit.Play();
     }
     
     protected override void Awake()

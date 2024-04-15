@@ -17,3 +17,5 @@ MonoBehaviour:
   jumpForce: 3
   rotationSpeed: 50
   gravity: -20
+  slideDuration: 0.4
+  slideSpeed: 0.26

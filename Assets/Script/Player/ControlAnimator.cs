@@ -12,6 +12,7 @@ public class ControlAnimator : CharacterControlAnimator
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
     [SerializeField] private ParticleSystem VFX_sword1;
+    [SerializeField] private VisualEffect VFX_slash;
     private void GetMovementInputValue()
     {
         moveAmount = ReceiveInput.Instance.moveAmount;
@@ -46,7 +47,13 @@ public class ControlAnimator : CharacterControlAnimator
     {
         VFX_sword1.Play();
     }
-
+    
+    public void SlashVFX(Vector3 _pos)
+    {
+        VFX_slash.transform.position = _pos;
+        VFX_slash.Play();
+        Debug.Log("Nora1" );
+    }
     #endregion
     
     
