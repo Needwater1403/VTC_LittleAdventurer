@@ -16,10 +16,9 @@ public class ControlCombat : CharacterControlCombat
 
     public void HandleAllCombat()
     {
-        GetAttackInputValue();
-        if (isAttacking)
+        if (health.CurrentHp <= 0)
         {
-            //InflictDamage();
+            
         }
     }
     

@@ -6,7 +6,8 @@ public class PlayerManager : CharacterManager
 {
     [SerializeField] protected ControlMovement _controlMovement;
     [SerializeField] protected ControlAnimator _controlAnimator;
-    [SerializeField] protected ControlCombat _controlCombat;
+    
+    private bool isDead;
     protected override void Awake()
     {
         base.Awake();
@@ -16,6 +17,10 @@ public class PlayerManager : CharacterManager
     protected override void Update()
     {
         base.Update();
+        if (_controlCombat.health.CurrentHp <= 0)
+        {
+            //DIE 
+        }
         if (_controlMovement)
         {
             _controlMovement.HandleAllMovement();
@@ -24,14 +29,11 @@ public class PlayerManager : CharacterManager
         {
             _controlAnimator.HandleAllAnimation();
         }
-        if (_controlCombat)
-        {
-            _controlCombat.HandleAllCombat();
-        }
     }
     // protected override void LateUpdate()
     // {
     //     base.LateUpdate();
     //     PlayerCamera.Instance.HandleCamera();
     // }
+    
 }
