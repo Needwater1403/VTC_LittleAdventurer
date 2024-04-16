@@ -22,9 +22,10 @@ public class DamageCollider : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(_controlCombat.health.configCombat.normalATK);
-                Debug.Log($"{health.gameObject.tag} Current HP: {health.CurrentHp}");
+                Debug.Log($"<color=red>{health.gameObject.tag}</color> Current HP: {health.CurrentHp}");
                 InitSlashVFX();
                 InitBeingHitVFX(other);
+                Blink(other);
             }        
             _controlCombat.targetList.Add(other);
         }
@@ -39,7 +40,7 @@ public class DamageCollider : MonoBehaviour
             {
                 RaycastHit hit;
                 var pos = transform.position + (-_collider.bounds.extents.y) * parent.transform.up;
-                var isHit = Physics.BoxCast(pos, _collider.bounds.extents, parent.transform.up, out hit,
+                var isHit = Physics.BoxCast(pos, _collider.bounds.extents/2, parent.transform.up, out hit,
                     transform.rotation, _collider.bounds.extents.y*2 , 1 << 6);
                 if (isHit)
                 {
@@ -59,5 +60,10 @@ public class DamageCollider : MonoBehaviour
                 _controlAnimator.BeingHitVFX(parent.transform.position);
             }
         }
+    }
+    private void Blink(Component other)
+    {
+        var _controlAnimator = other.GetComponent<CharacterControlAnimator>();
+        StartCoroutine(_controlAnimator.Te());
     }
 }

@@ -6,6 +6,10 @@ using UnityEngine;
 public class CharacterControlAnimator : MonoBehaviour
 {
     private CharacterManager _characterManager;
+    private MaterialPropertyBlock _material;
+    //public MaterialPropertyBlock _Material => _material;
+    private SkinnedMeshRenderer _renderer;
+    //public SkinnedMeshRenderer _Renderer => _renderer;
     private static readonly int VelocityX = Animator.StringToHash("velocityX");
     private static readonly int VelocityZ = Animator.StringToHash("velocityZ");
     private static readonly int isFall = Animator.StringToHash("isFall");
@@ -14,6 +18,9 @@ public class CharacterControlAnimator : MonoBehaviour
     protected virtual void Awake()
     {
         _characterManager = GetComponent<CharacterManager>();
+        _material = new MaterialPropertyBlock();
+        _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _renderer.GetPropertyBlock(_material);
     }
 
     protected void UpdateAnimation(float veloX, float veloY, bool isAttacking = false)
@@ -37,10 +44,19 @@ public class CharacterControlAnimator : MonoBehaviour
         }
         else
         {
-            //_characterManager._animator.SetBool(Attack, isAttacking);
             _characterManager._animator.SetFloat(VelocityX, veloX);
             _characterManager._animator.SetFloat(VelocityZ, veloY);
             _characterManager._animator.SetBool(isFall, _characterManager._characterController.isGrounded);
         }
+    }
+
+    public IEnumerator Te()
+    {
+        _material.SetFloat("_blink",0.55f);
+        _renderer.SetPropertyBlock(_material);
+        yield return new WaitForSeconds(0.2f);
+        _material.SetFloat("_blink",0);
+        _renderer.SetPropertyBlock(_material);
+        
     }
 }
