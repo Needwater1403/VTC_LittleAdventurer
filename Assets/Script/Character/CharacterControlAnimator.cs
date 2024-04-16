@@ -7,9 +7,7 @@ public class CharacterControlAnimator : MonoBehaviour
 {
     private CharacterManager _characterManager;
     private MaterialPropertyBlock _material;
-    //public MaterialPropertyBlock _Material => _material;
     private SkinnedMeshRenderer _renderer;
-    //public SkinnedMeshRenderer _Renderer => _renderer;
     private static readonly int VelocityX = Animator.StringToHash("velocityX");
     private static readonly int VelocityZ = Animator.StringToHash("velocityZ");
     private static readonly int isFall = Animator.StringToHash("isFall");
@@ -50,13 +48,39 @@ public class CharacterControlAnimator : MonoBehaviour
         }
     }
 
-    public IEnumerator Te()
+    #region ShaderVFX
+    public IEnumerator MaterialBlink()
     {
         _material.SetFloat("_blink",0.55f);
         _renderer.SetPropertyBlock(_material);
         yield return new WaitForSeconds(0.2f);
         _material.SetFloat("_blink",0);
         _renderer.SetPropertyBlock(_material);
-        
     }
+    IEnumerator MaterialDissolve()
+    {
+        yield return new WaitForSeconds(0.75f);
+        float duration = 2f;
+        float time = 0;
+        float dissolveStart = 20f;
+        float dissolveEnd = -10f;
+        float dissolve;
+        _material.SetFloat("_enableDissolve",1f);
+        _renderer.SetPropertyBlock(_material);
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            dissolve = Mathf.Lerp(dissolveStart, dissolveEnd, time / duration);
+            _material.SetFloat("_dissolve_height", dissolve);
+            _renderer.SetPropertyBlock(_material);
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+    protected virtual void DestroyObject()
+    {
+        StartCoroutine(MaterialDissolve());
+    }
+    
+    #endregion
 }

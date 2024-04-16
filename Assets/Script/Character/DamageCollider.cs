@@ -64,6 +64,6 @@ public class DamageCollider : MonoBehaviour
     private void Blink(Component other)
     {
         var _controlAnimator = other.GetComponent<CharacterControlAnimator>();
-        StartCoroutine(_controlAnimator.Te());
+        StartCoroutine(_controlAnimator.MaterialBlink());
     }
 }
