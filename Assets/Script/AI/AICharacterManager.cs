@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class AICharacterManager : CharacterManager
@@ -11,7 +12,8 @@ public class AICharacterManager : CharacterManager
     [SerializeField] private AIState currentState;
     [Title("State List")] 
     public List<AIState> stateList;
-
+    [Title("Drop Item")] 
+    [SerializeField] private GameObject dropItem;
     private bool isDead = false;
     public bool IsDead
     {
@@ -52,5 +54,10 @@ public class AICharacterManager : CharacterManager
         currentState = _state;
         ProcessState();
         Debug.Log("CurrentState: " + currentState);
+    }
+
+    public void InitDropItem()
+    {
+        Instantiate(dropItem, transform.position, quaternion.identity);
     }
 }
