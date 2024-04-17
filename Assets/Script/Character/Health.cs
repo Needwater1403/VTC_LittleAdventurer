@@ -8,7 +8,11 @@ public class Health : MonoBehaviour
 {
     public ConfigCombatSO configCombat;
     private float currentHP;
-    public float CurrentHp => currentHP;
+    public float CurrentHp
+    {
+        get => currentHP;
+        set => currentHP = value;
+    }
 
     private void Start()
     {
@@ -18,7 +22,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(float _damage)
     {
         currentHP -= _damage;
-        // CHECK DIE CONDITION
         if (currentHP <= 0)
         {
             currentHP = 0;

@@ -33,7 +33,7 @@ public class DamageCollider : MonoBehaviour
 
     private void InitSlashVFX()
     {
-        if (parent.CompareTag("Player"))
+        if (parent.CompareTag(Constants.PlayerTag))
         {
             var _controlAnimator = parent.GetComponent<ControlAnimator>();
             if (_controlAnimator != null)
@@ -52,7 +52,7 @@ public class DamageCollider : MonoBehaviour
 
     private void InitBeingHitVFX(Component other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(Constants.EnemyTag))
         {
             var _controlAnimator = other.GetComponent<AICharacterControlAnimator>();
             if (_controlAnimator != null)

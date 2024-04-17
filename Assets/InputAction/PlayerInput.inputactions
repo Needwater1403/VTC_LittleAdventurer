@@ -334,6 +334,17 @@
                 },
                 {
                     "name": "",
+                    "id": "2fb79f1b-1be8-4104-99aa-2508c3ff6d45",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e1c569ea-9154-46b2-a25e-bdf867de5d6a",
                     "path": "<Keyboard>/space",
                     "interactions": "",

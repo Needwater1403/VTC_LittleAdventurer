@@ -17,7 +17,12 @@ public class CharacterControlCombat : MonoBehaviour
 
     protected virtual void InflictDamage()
     {
+        targetList.Clear();
         SetCollider(true);
+        if (gameObject.CompareTag(Constants.PlayerTag))
+        {
+            GetComponent<ControlMovement>().ResetAtkStartTime();
+        }
     }
     protected virtual void ResetTargetList()
     {

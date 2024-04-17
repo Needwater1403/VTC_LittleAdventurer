@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    [SerializeField] protected ControlMovement _controlMovement;
-    [SerializeField] protected ControlAnimator _controlAnimator;
+    [HideInInspector] public ControlMovement _controlMovement;
+    [HideInInspector] public ControlAnimator _controlAnimator;
     
     private bool isDead;
+    public bool IsDead => isDead;
     protected override void Awake()
     {
         base.Awake();
@@ -16,10 +17,12 @@ public class PlayerManager : CharacterManager
 
     protected override void Update()
     {
+        if(isDead) return;
         base.Update();
         if (_controlCombat.health.CurrentHp <= 0)
         {
-            //DIE 
+            isDead = true;
+            _controlAnimator.isDead = true;
         }
         if (_controlMovement)
         {

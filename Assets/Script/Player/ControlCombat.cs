@@ -11,7 +11,7 @@ public class ControlCombat : CharacterControlCombat
     }
     private void GetAttackInputValue()
     {
-        isAttacking = ReceiveInput.Instance.isAttacking;
+        isAttacking = ReceiveInput.Instance.startAttack;
     }
 
     public void HandleAllCombat()

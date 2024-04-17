@@ -16,10 +16,11 @@ public class ControlMovement : CharacterControlMovement
     private Vector3 rotationDir;
     private float velocityY;
     private bool canMove;
+    private bool isRoll;
+    private bool isAttack;
     private float atkStartTime = 0;
-
     
-    [SerializeField] private ConfigMovementSO configMovement;
+    public ConfigMovementSO configMovement;
     protected override void Awake()
     {
         tf = transform;
@@ -33,13 +34,24 @@ public class ControlMovement : CharacterControlMovement
     private void GetAttackInputValue()
     {
         canMove = ReceiveInput.Instance.canMove;
+        isAttack = ReceiveInput.Instance.isAttack;
+    }
+    private void GetRollInputValue()
+    {
+        isRoll = ReceiveInput.Instance.isRoll;
     }
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {
         GetAttackInputValue();
-        if (!canMove)
+        GetRollInputValue();
+        if (!canMove && isAttack)
         {
-            SlideWhenAttack();
+            HandleSlideWhenAttack();
+            return;
+        }
+        if (!canMove && isRoll)
+        {
+            HandleRoll();
             return;
         }
         //Grounded movement handle
@@ -52,7 +64,6 @@ public class ControlMovement : CharacterControlMovement
     private void HandleGroundMovement()
     {
         GetMovementInputValue();
-        atkStartTime = 0;
         moveDir.Set(moveValue.x,0,moveValue.y);
         moveDir.Normalize();
         moveDir = Quaternion.Euler(0, -45f, 0) * moveDir;
@@ -73,8 +84,11 @@ public class ControlMovement : CharacterControlMovement
         moveDir += velocityY * Vector3.up;
         _playerManager._characterController.Move(moveDir * Time.deltaTime);
     }
-    
 
+    public void ResetAtkStartTime()
+    {
+        atkStartTime = 0;
+    }
     private void HandleRotation()
     {
         rotationDir = Vector3.zero;
@@ -91,7 +105,7 @@ public class ControlMovement : CharacterControlMovement
         transform.rotation = camDir;
     }
 
-    private void SlideWhenAttack()
+    private void HandleSlideWhenAttack()
     {
         if (atkStartTime != 0) return;
         atkStartTime = Time.time;
@@ -104,5 +118,12 @@ public class ControlMovement : CharacterControlMovement
             moveDir += velocityY * Vector3.up;
             _playerManager._characterController.Move(moveDir);
         }
+    }
+
+    private void HandleRoll()
+    {
+        moveDir = transform.forward * configMovement.rollSpeed;
+        moveDir += velocityY * Vector3.up;
+        _playerManager._characterController.Move(moveDir * Time.deltaTime);
     }
 }
