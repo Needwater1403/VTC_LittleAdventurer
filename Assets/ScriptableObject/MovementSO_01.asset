@@ -19,3 +19,6 @@ MonoBehaviour:
   gravity: -20
   slideDuration: 0.4
   slideSpeed: 0.26
+  rollSpeed: 8
+  clickAttackDuration: 0.4
+  clickRollDuration: 1.3

@@ -10,4 +10,7 @@ public class ConfigMovementSO : ScriptableObject
     public float gravity;
     public float slideDuration;
     public float slideSpeed;
+    public float rollSpeed;
+    public float clickAttackDuration;
+    public float clickRollDuration;
 }
