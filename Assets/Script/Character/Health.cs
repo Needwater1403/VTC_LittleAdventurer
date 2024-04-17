@@ -27,4 +27,13 @@ public class Health : MonoBehaviour
             currentHP = 0;
         }
     }
+
+    public void Heal(float _amount)
+    {
+        currentHP += _amount;
+        if (currentHP > configCombat.maxHP)
+        {
+            currentHP = configCombat.maxHP;
+        }
+    }
 }

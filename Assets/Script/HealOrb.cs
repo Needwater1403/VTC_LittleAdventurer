@@ -18,7 +18,7 @@ public class HealOrb : DropItem
     protected override void DropAction(Collider other)
     {
         base.DropAction(other);
-        other.GetComponent<Health>().CurrentHp += 10;
+        other.GetComponent<Health>().Heal(10);
         other.GetComponent<PlayerManager>()._controlAnimator.HealVFX();
         Destroy(gameObject);
     }
