@@ -8,5 +8,4 @@ public class ConfigCombatSO : ScriptableObject
     public string targetTag;
     public float maxHP;
     public float normalATK;
-    public float projectileDamage;
 }
