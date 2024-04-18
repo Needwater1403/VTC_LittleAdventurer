@@ -100,12 +100,5 @@ public class ControlAnimator : CharacterControlAnimator
     {
         base.Awake();
     }
-
-    private void Start()
-    {
-        GetAttackInputValue();
-        GetRollInputValue();
-        Debug.Log("Roll: "+isRoll+"\nATK: "+isAttacking);
-    }
 }
 

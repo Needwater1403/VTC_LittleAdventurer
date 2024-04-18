@@ -8,6 +8,12 @@ public class CharacterControlAnimator : MonoBehaviour
     private CharacterManager _characterManager;
     private MaterialPropertyBlock _material;
     private SkinnedMeshRenderer _renderer;
+    protected SkinnedMeshRenderer _Renderer
+    {
+        get => _renderer;
+        set => _renderer = value;
+    }
+
     private static readonly int VelocityX = Animator.StringToHash("velocityX");
     private static readonly int VelocityZ = Animator.StringToHash("velocityZ");
     private static readonly int isFall = Animator.StringToHash("isFall");
@@ -21,7 +27,7 @@ public class CharacterControlAnimator : MonoBehaviour
         _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         _renderer.GetPropertyBlock(_material);
     }
-
+    
     protected void UpdateAnimation(float veloX, float veloY, bool _isDead, bool isAttacking, bool isRoll = false)
     {
         if (_isDead)
@@ -95,9 +101,36 @@ public class CharacterControlAnimator : MonoBehaviour
         if(manager) manager.InitDropItem();
         Destroy(gameObject);
     }
+    
+    IEnumerator MaterialAppear()
+    {
+        float duration = 2f;
+        float time = 0;
+        float dissolveStart = -10f;
+        float dissolveEnd = 20f;
+        float appear;
+        _renderer.enabled = true;
+        _material.SetFloat("_enableDissolve",1f);
+        _renderer.SetPropertyBlock(_material);
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            appear = Mathf.Lerp(dissolveStart, dissolveEnd, time / duration);
+            _material.SetFloat("_dissolve_height", appear);
+            _renderer.SetPropertyBlock(_material);
+            yield return null;
+        }
+        _material.SetFloat("_enableDissolve",0f);
+        _renderer.SetPropertyBlock(_material);
+    }
     protected virtual void DestroyObject()
     {
         StartCoroutine(MaterialDissolve());
+    }
+
+    public void SpawnEffect()
+    {
+        StartCoroutine(MaterialAppear());
     }
     
     #endregion

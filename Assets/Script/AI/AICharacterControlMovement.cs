@@ -1,15 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AICharacterControlMovement : CharacterControlMovement
 {
-    private UnityEngine.AI.NavMeshAgent _navMeshAgent;
+    [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
     private Transform targetTf;
     private PlayerManager _player;
     public float aggroRange = 10;
     public float attackRange = 1;
+    public bool canRotate;
     protected override void Awake()
     {
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -46,13 +48,29 @@ public class AICharacterControlMovement : CharacterControlMovement
         }
         if(Vector3.Distance(targetTf.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
+            canRotate = false;
             _test?.Invoke(_list[1]);
         }
     }
-    public void LookAtTarget()
+    
+    public void Rotate()
     {
         Quaternion rotation = Quaternion.LookRotation(targetTf.position - transform.position);
         transform.rotation = rotation;
+    }
+
+    private void Update()
+    {
+        if (canRotate)
+        {
+            LookAtTarget();
+        }
+        
+    }
+
+    public void LookAtTarget()
+    {
+        transform.LookAt(targetTf, Vector3.up);
     }
     
 }

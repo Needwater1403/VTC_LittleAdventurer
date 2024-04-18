@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class AICharacterManager : CharacterManager
 {
-    [SerializeField] public AICharacterControlAnimator _controlAnimator;
-    [SerializeField] public AICharacterControlMovement _controlMovement;
+    public AICharacterControlAnimator _controlAnimator;
+    public AICharacterControlMovement _controlMovement;
     [Header("Current State")] 
     [SerializeField] private AIState currentState;
     [Title("State List")] 
@@ -15,6 +15,9 @@ public class AICharacterManager : CharacterManager
     [Title("Drop Item")] 
     [SerializeField] private GameObject dropItem;
     private bool isDead = false;
+    [HideInInspector] public float spawnDuration = 2f;
+    [HideInInspector] public float spawnTimer;
+    [HideInInspector] public bool isSpawn;
     public bool IsDead
     {
         get => isDead;
@@ -24,7 +27,7 @@ public class AICharacterManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        currentState = stateList[0];
+        currentState = stateList[4];
     }
     protected override void FixedUpdate()
     {
