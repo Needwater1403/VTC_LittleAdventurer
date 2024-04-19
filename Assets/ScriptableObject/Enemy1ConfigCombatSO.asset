@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: Enemy1ConfigCombatSO
   m_EditorClassIdentifier: 
   targetTag: Player
-  maxHP: 100
+  maxHP: 10
   normalATK: 10
-  projectileDamage: 0
