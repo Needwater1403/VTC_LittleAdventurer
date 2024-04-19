@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.CompareTag(Constants.EnemyTag)) return;
         if (other.CompareTag(configBullet.targetTag))
         {
             var health = other.GetComponent<Health>();

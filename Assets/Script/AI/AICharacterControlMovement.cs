@@ -9,8 +9,7 @@ public class AICharacterControlMovement : CharacterControlMovement
     [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
     private Transform targetTf;
     private PlayerManager _player;
-    public float aggroRange = 10;
-    public float attackRange = 1;
+    private float aggroRange = 17;
     public bool canRotate;
     protected override void Awake()
     {

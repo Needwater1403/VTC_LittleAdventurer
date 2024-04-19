@@ -11,6 +11,7 @@ public class DeadState : AIState
         {
             aiCharacterManager.IsDead = true;
             aiCharacterManager._controlAnimator.isDead = true;
+            aiCharacterManager._controlMovement.canRotate = false;
         }
         return base.Tick(aiCharacterManager);
     }
