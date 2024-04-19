@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ public class UIManager : MonoBehaviour
     [Title("Panel")] 
     [SerializeField] private GameObject YouDiedPanel;
     [SerializeField] private GameObject YouWinPanel;
+    [Title("Text")] 
+    public TextMeshProUGUI txt_coin;
     private void Start()
     {
         if (Instance == null)

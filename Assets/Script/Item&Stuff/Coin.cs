@@ -16,6 +16,7 @@ public class Coin : DropItem
     {
         GameManager.Instance.Player.AddCoin(1);
         GameManager.Instance.Player._controlAnimator.PickUpCoinVFX();
+        UIManager.Instance.txt_coin.SetText(GameManager.Instance.Player.CoinNum.ToString());
         base.DropAction();
     }
 }

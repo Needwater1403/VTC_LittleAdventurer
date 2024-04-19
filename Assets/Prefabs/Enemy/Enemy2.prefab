@@ -167,7 +167,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
   - {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
   - {fileID: 11400000, guid: 143f1a6a14a2eed409e8058e37cb7c29, type: 2}
-  dropItem: {fileID: 1551220485014648097, guid: 455f538884b6b1f4dbcfa522e3a99dcf, type: 3}
+  dropItem: {fileID: 4589548862031813486, guid: 057d9fc301c213745906cbee551e743a, type: 3}
   spawnDuration: 2
   spawnTimer: 0
   isSpawn: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 0}
+  aggroRange: 17
   canRotate: 0
 --- !u!114 &5012755664558159892
 MonoBehaviour:
