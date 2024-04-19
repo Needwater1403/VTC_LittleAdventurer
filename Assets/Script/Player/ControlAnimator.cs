@@ -7,7 +7,7 @@ using UnityEngine.VFX;
 
 public class ControlAnimator : CharacterControlAnimator
 {
-    private float moveAmount;
+    public float moveAmount;
     private bool isAttacking;
     private bool isRoll;
     [HideInInspector] public bool isDead;
@@ -18,8 +18,14 @@ public class ControlAnimator : CharacterControlAnimator
     [SerializeField] private ParticleSystem VFX_sword3;
     [SerializeField] private VisualEffect VFX_slash;
     [SerializeField] private VisualEffect VFX_Heal;
-    private void GetMovementInputValue()
+    [SerializeField] private VisualEffect VFX_PickUpCoin;
+    private void GetMovementInputValue(bool isPaused)
     {
+        if (isPaused)
+        {
+            moveAmount = 0;
+            return;
+        }
         moveAmount = ReceiveInput.Instance.moveAmount;
     }
     private void GetAttackInputValue()
@@ -30,9 +36,9 @@ public class ControlAnimator : CharacterControlAnimator
     {
         isRoll = ReceiveInput.Instance.startRoll;
     }
-    public void HandleAllAnimation()
+    public void HandleAllAnimation(bool isPaused)
     {
-        GetMovementInputValue();
+        GetMovementInputValue(isPaused);
         GetAttackInputValue();
         GetRollInputValue();
         UpdateAnimation(0,moveAmount, isDead, isAttacking, isRoll);
@@ -65,27 +71,20 @@ public class ControlAnimator : CharacterControlAnimator
     {
         VFX_sword3.Play();
     }
-
-    public void StopSwordVFX()
-    {
-        VFX_sword1.Simulate(0);
-        VFX_sword1.Stop();
-        VFX_sword2.Simulate(0);
-        VFX_sword2.Stop();
-        VFX_sword3.Simulate(0);
-        VFX_sword3.Stop();
-    }
     
     public void SlashVFX(Vector3 _pos)
     {
         VFX_slash.transform.position = _pos;
         VFX_slash.Play();
-        Debug.Log("SlashVFX" );
     }
 
     public void HealVFX()
     {
         VFX_Heal.Play();
+    }
+    public void PickUpCoinVFX()
+    {
+        VFX_PickUpCoin.Play();
     }
     #endregion
     

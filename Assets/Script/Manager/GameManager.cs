@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private bool gameOver;
     private void Awake()
     {
-        DontDestroyOnLoad(transform.parent);
+        //DontDestroyOnLoad(transform.parent);
     }
 
     private void Start()
@@ -32,8 +32,14 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (player != null || gameOver) return; 
+        if (Player.CoinNum == 4)
+        {
+            UIManager.Instance.ShowWinPanel(true);
+            Player.Pause(true);
+        }
+        if (player != null || gameOver) return;
         gameOver = true;
-        Debug.Log("<color=red>YOU DIED!!!</color> ");
+        UIManager.Instance.ShowLosePanel(true);
+
     }
 }

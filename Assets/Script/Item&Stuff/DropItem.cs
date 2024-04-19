@@ -15,12 +15,12 @@ public class DropItem : MonoBehaviour
     {
         if (other.CompareTag(Constants.PlayerTag))
         {
-            DropAction(other);
+            DropAction();
         }
     }
 
-    protected virtual void DropAction(Collider other)
+    protected virtual void DropAction()
     {
-        
+        Destroy(gameObject);
     }
 }

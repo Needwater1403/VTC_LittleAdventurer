@@ -15,11 +15,10 @@ public class HealOrb : DropItem
         _renderer.GetPropertyBlock(_material);
     }
 
-    protected override void DropAction(Collider other)
+    protected override void DropAction()
     {
-        base.DropAction(other);
-        other.GetComponent<Health>().Heal(10);
-        other.GetComponent<PlayerManager>()._controlAnimator.HealVFX();
-        Destroy(gameObject);
+        GameManager.Instance.Player.Health.Heal(10);
+        GameManager.Instance.Player._controlAnimator.HealVFX();
+        base.DropAction();
     }
 }

@@ -8,9 +8,9 @@ using UnityEngine.VFX;
 public class AICharacterControlAnimator : CharacterControlAnimator
 {
     public float moveAmount;
-    public bool isAttacking;
-    public bool canMove;
-    public bool isDead;
+    [HideInInspector] public bool isAttacking;
+    [HideInInspector] public bool canMove;
+    [HideInInspector] public bool isDead;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
     [SerializeField] private VisualEffect VFX_attack;

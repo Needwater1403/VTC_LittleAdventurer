@@ -24,11 +24,21 @@ public class Bullet : MonoBehaviour
             if (health != null)
             {
                 health.TakeDamage(configBullet.damage);
-                Debug.Log($"<color=red>{health.gameObject.tag}</color>" +
-                                     $"Current HP: {health.CurrentHp}");
+                Blink(other);
             }        
         }
         Instantiate(VFX_hit, transform.position, Quaternion.identity);
+        StartCoroutine(DetroyBullet());
+    }
+    private void Blink(Component other)
+    {
+        var controlAnimator = other.GetComponent<CharacterControlAnimator>();
+        StartCoroutine(controlAnimator.MaterialBlink());
+    }
+
+    IEnumerator DetroyBullet()
+    {
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 }

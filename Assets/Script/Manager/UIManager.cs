@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [HideInInspector] public static UIManager Instance;
+    public static UIManager Instance;
     [Title("Player UI")] 
     [SerializeField] private Slider healthSlider;
     private float lastHealth;
+    [Title("Panel")] 
+    [SerializeField] private GameObject YouDiedPanel;
+    [SerializeField] private GameObject YouWinPanel;
     private void Start()
     {
         if (Instance == null)
@@ -34,5 +38,25 @@ public class UIManager : MonoBehaviour
     {
         var percentage = lastHealth / maxHP ;
         healthSlider.value = (percentage);
+    }
+
+    public void ShowLosePanel(bool show)
+    {
+        YouDiedPanel.SetActive(show);
+    }
+    
+    public void ShowWinPanel(bool show)
+    {
+        YouWinPanel.SetActive(show);
+    }
+
+    public void OnClickRestart()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: 1);
+    }
+    
+    public void OnClickReturnToMainMenu()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: 0);
     }
 }
