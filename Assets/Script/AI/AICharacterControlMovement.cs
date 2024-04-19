@@ -7,22 +7,20 @@ using UnityEngine;
 public class AICharacterControlMovement : CharacterControlMovement
 {
     [HideInInspector] public UnityEngine.AI.NavMeshAgent _navMeshAgent;
-    private Transform targetTf;
     private PlayerManager _player;
-    private float aggroRange = 17;
-    public bool canRotate;
+    public float aggroRange = 17;
+    [HideInInspector] public bool canRotate;
     protected override void Awake()
     {
         _navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        targetTf = GameObject.FindWithTag(Constants.PlayerTag).transform;
-        _player = targetTf.GetComponent<PlayerManager>();
+        _player = GameManager.Instance.Player;
     }
     
     public void HandleAIPursueMovement(Action<AIState> _test, List<AIState> _list)
     {
-        if(Vector3.Distance(targetTf.position, transform.position) >= _navMeshAgent.stoppingDistance)
+        if(Vector3.Distance(_player.transform.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
-            _navMeshAgent.SetDestination(targetTf.position);
+            _navMeshAgent.SetDestination(_player.transform.position);
         }
         else
         {
@@ -31,8 +29,8 @@ public class AICharacterControlMovement : CharacterControlMovement
     }
     public void HandleAIAggroRange(Action<AIState> _test, List<AIState> _list)
     {
-        if (!targetTf || _player.IsDead) return;
-        if(Vector3.Distance(targetTf.position, transform.position) <= aggroRange)
+        if (!_player.transform || _player.IsDead) return;
+        if(Vector3.Distance(_player.transform.position, transform.position) <= aggroRange)
         {
             _test?.Invoke(_list[1]);
         }
@@ -40,12 +38,12 @@ public class AICharacterControlMovement : CharacterControlMovement
     public void HandleAIAttackRange(Action<AIState> _test, List<AIState> _list)
     {
         
-        if (!targetTf || _player.IsDead)
+        if (!_player.transform || _player.IsDead)
         {
             _test?.Invoke(_list[0]);
             return;
         }
-        if(Vector3.Distance(targetTf.position, transform.position) >= _navMeshAgent.stoppingDistance)
+        if(Vector3.Distance(_player.transform.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
             canRotate = false;
             _test?.Invoke(_list[1]);
@@ -54,7 +52,7 @@ public class AICharacterControlMovement : CharacterControlMovement
     
     public void Rotate()
     {
-        Quaternion rotation = Quaternion.LookRotation(targetTf.position - transform.position);
+        Quaternion rotation = Quaternion.LookRotation(_player.transform.position - transform.position);
         transform.rotation = rotation;
     }
 
@@ -69,7 +67,7 @@ public class AICharacterControlMovement : CharacterControlMovement
 
     public void LookAtTarget()
     {
-        transform.LookAt(targetTf, Vector3.up);
+        transform.LookAt(_player.transform, Vector3.up);
     }
     
 }

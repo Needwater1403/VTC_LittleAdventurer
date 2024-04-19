@@ -13,13 +13,4 @@ public class ControlCombat : CharacterControlCombat
     {
         isAttacking = ReceiveInput.Instance.startAttack;
     }
-
-    public void HandleAllCombat()
-    {
-        if (health.CurrentHp <= 0)
-        {
-            
-        }
-    }
-    
 }

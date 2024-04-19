@@ -104,7 +104,7 @@ public class CharacterControlAnimator : MonoBehaviour
     
     IEnumerator MaterialAppear()
     {
-        float duration = 2f;
+        float duration = 1.5f;
         float time = 0;
         float dissolveStart = -10f;
         float dissolveEnd = 20f;

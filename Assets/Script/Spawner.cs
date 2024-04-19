@@ -8,7 +8,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [Title("Trigger Collider")] 
-    public Collider collider;
+    public BoxCollider _collider;
     [Title("List of Enemy & Position")]
     public List<SpawnPos> spawnList;
     [Title("Gate")]
@@ -50,7 +50,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         foreach (var spawnPos in spawnList)
         {
             if (spawnPos != null)
@@ -59,7 +59,9 @@ public class Spawner : MonoBehaviour
                 enemyList.Add(Instantiate(spawnPos.Enemy, transform1.position, transform1.rotation));
             }
         }
-        collider.enabled = false;
+
+        if (_collider == null) _collider = GetComponent<BoxCollider>();
+        _collider.enabled = false;
         stageStart = true;
         yield return null;
     }

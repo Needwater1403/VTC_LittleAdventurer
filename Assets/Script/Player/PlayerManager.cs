@@ -15,7 +15,7 @@ public class PlayerManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(transform.parent);
+        //DontDestroyOnLoad(transform.parent);
     }
 
     protected override void Update()
@@ -38,11 +38,6 @@ public class PlayerManager : CharacterManager
             _controlMovement.HandleAllMovement();
         }
     }
-    // protected override void LateUpdate()
-    // {
-    //     base.LateUpdate();
-    //     PlayerCamera.Instance.HandleCamera();
-    // }
     public float GetMaxHP()
     {
         return health.configCombat.maxHP;

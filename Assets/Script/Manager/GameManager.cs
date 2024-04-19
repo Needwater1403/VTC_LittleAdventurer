@@ -13,10 +13,6 @@ public class GameManager : MonoBehaviour
     public PlayerManager Player=> player;
 
     private bool gameOver;
-    private void Awake()
-    {
-        //DontDestroyOnLoad(transform.parent);
-    }
 
     private void Start()
     {
