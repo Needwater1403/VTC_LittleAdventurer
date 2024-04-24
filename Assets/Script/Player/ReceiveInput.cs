@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 public class ReceiveInput : MonoBehaviour
 {
     public static ReceiveInput Instance;
-    [HideInInspector] public PlayerManager playerManager;
     public Vector2 movementInputValue;
     public Vector2 lookInputValue;
     public float moveAmount;
@@ -25,7 +24,6 @@ public class ReceiveInput : MonoBehaviour
     
     private void Awake()
     {
-        playerManager = GetComponent<PlayerManager>();
         startRoll = false; // FIX BUG: CHARACTER AUTO ROLL WHEN GAME START WITHOUT RECEIVING INPUT
     }
 
@@ -110,9 +108,9 @@ public class ReceiveInput : MonoBehaviour
         {
             atkTimeCounter+= Time.deltaTime;
         }
-        if (!(atkTimeCounter >= playerManager._controlMovement.configMovement.clickAttackDuration)) return;
+        if (!(atkTimeCounter >= ConfigCenter.Instance.GetPLayerConfigMovement().clickAttackDuration)) return;
         canAttack = true;
-        atkTimeCounter -= playerManager._controlMovement.configMovement.clickAttackDuration;
+        atkTimeCounter -= ConfigCenter.Instance.GetPLayerConfigMovement().clickAttackDuration;
     }
     private void ResetRollTime()
     {
@@ -120,8 +118,8 @@ public class ReceiveInput : MonoBehaviour
         {
             rollTimeCounter += Time.deltaTime;
         }
-        if (!(rollTimeCounter >= playerManager._controlMovement.configMovement.clickRollDuration)) return;
+        if (!(rollTimeCounter >= ConfigCenter.Instance.GetPLayerConfigMovement().clickRollDuration)) return;
         canRoll = true;
-        rollTimeCounter -= playerManager._controlMovement.configMovement.clickRollDuration;
+        rollTimeCounter -= ConfigCenter.Instance.GetPLayerConfigMovement().clickRollDuration;
     }
 }

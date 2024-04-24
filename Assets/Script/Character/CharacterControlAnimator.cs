@@ -65,7 +65,7 @@ public class CharacterControlAnimator : MonoBehaviour
         {
             _characterManager._animator.SetFloat(VelocityX, veloX);
             _characterManager._animator.SetFloat(VelocityZ, veloY);
-            _characterManager._animator.SetBool(isFall, _characterManager._characterController.isGrounded);
+            //_characterManager._animator.SetBool(isFall, _characterManager._characterController.isGrounded);
         }
     }
 

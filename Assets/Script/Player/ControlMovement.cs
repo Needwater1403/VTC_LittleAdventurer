@@ -6,11 +6,8 @@ using UnityEngine;
 
 public class ControlMovement : CharacterControlMovement
 {
-    private PlayerManager _playerManager;
     
-    private Transform tf;
-    public Transform TF => tf;
-
+    //private Transform tf;
     private Vector2 moveValue;
     private Vector3 moveDir;
     private Vector3 rotationDir;
@@ -20,11 +17,10 @@ public class ControlMovement : CharacterControlMovement
     private bool isAttack;
     private float atkStartTime = 0;
     
-    public ConfigMovementSO configMovement;
+    private ConfigMovementSO configMovement => ConfigCenter.Instance.GetPLayerConfigMovement();
     protected override void Awake()
     {
-        tf = transform;
-        _playerManager = GetComponent<PlayerManager>();
+        //tf = transform;
     }
 
     private void GetMovementInputValue()
@@ -80,9 +76,9 @@ public class ControlMovement : CharacterControlMovement
         }
         
         //------------HANDLE GRAVITY------------
-        velocityY = !_playerManager._characterController.isGrounded ? configMovement.gravity : configMovement.gravity * 0.3f;
+        velocityY = !GameManager.Instance.Player._characterController.isGrounded ? configMovement.gravity : configMovement.gravity * 0.3f;
         moveDir += velocityY * Vector3.up;
-        _playerManager._characterController.Move(moveDir * Time.deltaTime);
+        GameManager.Instance.Player._characterController.Move(moveDir * Time.deltaTime);
     }
 
     public void ResetAtkStartTime()
@@ -116,7 +112,7 @@ public class ControlMovement : CharacterControlMovement
             var lerpTime = time / configMovement.slideDuration;
             moveDir = Vector3.Lerp(transform.forward * configMovement.slideSpeed, Vector3.zero, lerpTime);
             moveDir += velocityY * Vector3.up;
-            _playerManager._characterController.Move(moveDir);
+            GameManager.Instance.Player._characterController.Move(moveDir);
         }
     }
 
@@ -124,6 +120,6 @@ public class ControlMovement : CharacterControlMovement
     {
         moveDir = transform.forward * configMovement.rollSpeed;
         moveDir += velocityY * Vector3.up;
-        _playerManager._characterController.Move(moveDir * Time.deltaTime);
+        GameManager.Instance.Player._characterController.Move(moveDir * Time.deltaTime);
     }
 }
