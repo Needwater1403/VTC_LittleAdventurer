@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Player.CoinNum == 1)
+        if (Player.CoinNum == 4)
         {
             Time.timeScale = 0;
             Player.Pause(true);
