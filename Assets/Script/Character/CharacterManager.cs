@@ -23,10 +23,6 @@ public class CharacterManager : MonoBehaviour
     {
 
     }
-    // protected virtual void LateUpdate()
-    // {
-    //
-    // }
     protected virtual void FixedUpdate()
     {
 

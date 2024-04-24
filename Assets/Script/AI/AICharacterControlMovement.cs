@@ -67,6 +67,7 @@ public class AICharacterControlMovement : CharacterControlMovement
 
     public void LookAtTarget()
     {
+        if (_player == null) return;
         transform.LookAt(_player.transform, Vector3.up);
     }
     

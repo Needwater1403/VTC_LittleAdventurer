@@ -135,15 +135,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.67164546
+      - time: 0.5229693
         functionName: ResetTargetList
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.83192587
-        functionName: EndAnimation
+      - time: 0.5447568
+        functionName: EndAttackAnimation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8263158
+        functionName: EndAttackState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -192,15 +199,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.64526033
+      - time: 0.5291707
         functionName: ResetTargetList
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.82539684
-        functionName: EndAnimation
+      - time: 0.5545211
+        functionName: EndAttackAnimation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8263158
+        functionName: EndAttackState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -249,15 +263,22 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.56903774
+      - time: 0.579221
         functionName: ResetTargetList
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8979592
-        functionName: EndAnimation
+      - time: 0.59449685
+        functionName: EndAttackAnimation
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8263158
+        functionName: EndAttackState
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

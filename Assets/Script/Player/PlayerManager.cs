@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    [HideInInspector] public ControlMovement _controlMovement;
-    [HideInInspector] public ControlAnimator _controlAnimator;
+    public ControlMovement _controlMovement;
+    public ControlAnimator _controlAnimator;
     [SerializeField] private Health health;
     public Health Health => health;
     private float coinNum = 0;
@@ -22,6 +22,7 @@ public class PlayerManager : CharacterManager
     {
         if(isDead) return;
         base.Update();
+        
         if (_controlCombat.health.CurrentHp <= 0)
         {
             isDead = true;
