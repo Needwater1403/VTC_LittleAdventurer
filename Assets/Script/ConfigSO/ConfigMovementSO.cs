@@ -5,12 +5,11 @@ public class ConfigMovementSO : ScriptableObject
 {
     public float walkSpeed;
     public float runSpeed;
-    public float jumpForce;
     public float rotationSpeed;
     public float gravity;
     public float slideDuration;
     public float slideSpeed;
+    public float attackCooldown;
     public float rollSpeed;
-    public float clickAttackDuration;
-    public float clickRollDuration;
+    public float rollCooldown;
 }

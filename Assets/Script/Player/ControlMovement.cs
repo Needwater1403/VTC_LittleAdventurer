@@ -3,18 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ControlMovement : CharacterControlMovement
 {
     
     //private Transform tf;
-    private Vector2 moveValue;
     private Vector3 moveDir;
     private Vector3 rotationDir;
     private float velocityY;
-    private bool canMove;
-    private bool isRoll;
-    private bool isAttack;
     private float atkStartTime = 0;
     
     private ConfigMovementSO configMovement => ConfigCenter.Instance.GetPLayerConfigMovement();
@@ -22,34 +19,12 @@ public class ControlMovement : CharacterControlMovement
     {
         //tf = transform;
     }
-
-    private void GetMovementInputValue()
-    {
-        moveValue = ReceiveInput.Instance.movementInputValue;
-    }
-    private void GetAttackInputValue()
-    {
-        canMove = ReceiveInput.Instance.canMove;
-        isAttack = ReceiveInput.Instance.isAttack;
-    }
-    private void GetRollInputValue()
-    {
-        isRoll = ReceiveInput.Instance.isRoll;
-    }
+    
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {
-        GetAttackInputValue();
-        GetRollInputValue();
-        if (!canMove && isAttack)
-        {
-            HandleSlideWhenAttack();
-            return;
-        }
-        if (!canMove && isRoll)
-        {
-            HandleRoll();
-            return;
-        }
+
+        HandleAttackSlide();
+        HandleRoll();
         //Grounded movement handle
         HandleGroundMovement();
         //Rotation handle
@@ -59,8 +34,7 @@ public class ControlMovement : CharacterControlMovement
     
     private void HandleGroundMovement()
     {
-        GetMovementInputValue();
-        moveDir.Set(moveValue.x,0,moveValue.y);
+        moveDir.Set(ReceiveInput.Instance.MovementInputValue.x,0,ReceiveInput.Instance.MovementInputValue.y);
         moveDir.Normalize();
         moveDir = Quaternion.Euler(0, -45f, 0) * moveDir;
         moveDir.y = 0;
@@ -74,7 +48,22 @@ public class ControlMovement : CharacterControlMovement
         {
             moveDir *= configMovement.runSpeed;
         }
-        
+
+        if (lockInRoll)
+        {
+            moveDir = transform.forward * configMovement.rollSpeed;
+            moveDir += velocityY * Vector3.up;
+        }
+
+        if(lockInAttackState)
+        {
+            if (lockInAttack)
+            {
+                HandleSlideWhenAttack();
+            }
+
+            moveDir = Vector3.zero;
+        }
         //------------HANDLE GRAVITY------------
         velocityY = !GameManager.Instance.Player._characterController.isGrounded ? configMovement.gravity : configMovement.gravity * 0.3f;
         moveDir += velocityY * Vector3.up;
@@ -87,8 +76,9 @@ public class ControlMovement : CharacterControlMovement
     }
     private void HandleRotation()
     {
+        if (lockInRoll || lockInAttackState) return;
         rotationDir = Vector3.zero;
-        rotationDir.Set(moveValue.x,0,moveValue.y);
+        rotationDir.Set(ReceiveInput.Instance.MovementInputValue.x,0,ReceiveInput.Instance.MovementInputValue.y);
         rotationDir.Normalize();
         rotationDir = Quaternion.Euler(0, -45f, 0) * rotationDir;
         rotationDir.y = 0;
@@ -115,11 +105,39 @@ public class ControlMovement : CharacterControlMovement
             GameManager.Instance.Player._characterController.Move(moveDir);
         }
     }
-
+    
+    private float lastRollTime;
+    [HideInInspector] public bool lockInRoll;
     private void HandleRoll()
     {
-        moveDir = transform.forward * configMovement.rollSpeed;
-        moveDir += velocityY * Vector3.up;
-        GameManager.Instance.Player._characterController.Move(moveDir * Time.deltaTime);
+        if(Time.realtimeSinceStartup - lastRollTime < configMovement.rollCooldown) return;
+        var _roll = ReceiveInput.Instance.RollInputValue;
+        if (!_roll) return;
+        OnRoll();
+    }
+    public void OnRoll()
+    {
+        if (lockInRoll) return;
+        lastRollTime = Time.realtimeSinceStartup;
+        GameManager.Instance.Player._controlAnimator.SetRoll();
+        lockInRoll = true;
+    }
+    
+    private float lastAttackTime;
+    [HideInInspector] public bool lockInAttack;
+    [FormerlySerializedAs("lockInAttackPhase")] [FormerlySerializedAs("lockInAttack1")] [HideInInspector] public bool lockInAttackState;
+    private void HandleAttackSlide()
+    {
+        if(Time.realtimeSinceStartup - lastAttackTime < configMovement.attackCooldown) return;
+        var _slide = ReceiveInput.Instance.AttackInputValue;
+        if (!_slide) return;
+        OnAttackSlide();
+    }
+    public void OnAttackSlide()
+    {
+        lastAttackTime = Time.realtimeSinceStartup;
+        GameManager.Instance.Player._controlAnimator.SetAttack();
+        lockInAttack = true;
+        lockInAttackState = true;
     }
 }

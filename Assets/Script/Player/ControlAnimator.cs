@@ -8,8 +8,6 @@ using UnityEngine.VFX;
 public class ControlAnimator : CharacterControlAnimator
 {
     public float moveAmount;
-    private bool isAttacking;
-    private bool isRoll;
     [HideInInspector] public bool isDead;
     [Title("VFX")]
     [SerializeField] private VisualEffect VFX_footStep;
@@ -19,6 +17,9 @@ public class ControlAnimator : CharacterControlAnimator
     [SerializeField] private VisualEffect VFX_slash;
     [SerializeField] private VisualEffect VFX_Heal;
     [SerializeField] private VisualEffect VFX_PickUpCoin;
+    
+    private static readonly int Roll = Animator.StringToHash("Roll");
+    private static readonly int Attack = Animator.StringToHash("Attack");
     private void GetMovementInputValue(bool isPaused)
     {
         if (isPaused)
@@ -28,31 +29,20 @@ public class ControlAnimator : CharacterControlAnimator
         }
         moveAmount = ReceiveInput.Instance.moveAmount;
     }
-    private void GetAttackInputValue(bool isPaused)
-    {
-        if (isPaused)
-        {
-            moveAmount = 0;
-            return;
-        }
-        isAttacking = ReceiveInput.Instance.startAttack;
-    }
-    private void GetRollInputValue(bool isPaused)
-    {
-        if (isPaused)
-        {
-            moveAmount = 0;
-            return;
-        }
-        isRoll = ReceiveInput.Instance.startRoll;
-    }
     public void HandleAllAnimation(bool isPaused)
     {
         GetMovementInputValue(isPaused);
-        GetAttackInputValue(isPaused);
-        GetRollInputValue(isPaused);
-        UpdateAnimation(0,moveAmount, isDead, isAttacking, isRoll);
+        UpdateAnimation(0,moveAmount, isDead);
         UpdateVFX();
+    }
+
+    public void SetRoll()
+    {
+        GameManager.Instance.Player._animator.SetTrigger(Roll);
+    }
+    public void SetAttack()
+    {
+        GameManager.Instance.Player._animator.SetTrigger(Attack);
     }
 
     #region VFX
@@ -101,9 +91,18 @@ public class ControlAnimator : CharacterControlAnimator
     
     private void EndAnimation()
     {
-        ReceiveInput.Instance.canMove = true;
-        ReceiveInput.Instance.isRoll = false;
-        ReceiveInput.Instance.isAttack = false;
+        GameManager.Instance.Player._controlMovement.lockInRoll = false;
+        //ReceiveInput.Instance.isAttack = false;
+    }
+    
+    private void EndAttackAnimation()
+    {
+        GameManager.Instance.Player._controlMovement.lockInAttack = false;
+    }
+    
+    private void EndAttackState()
+    {
+        GameManager.Instance.Player._controlMovement.lockInAttackState = false;
     }
     protected override void Awake()
     {

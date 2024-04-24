@@ -19,7 +19,7 @@ public class CharacterControlAnimator : MonoBehaviour
     private static readonly int isFall = Animator.StringToHash("isFall");
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int isDead = Animator.StringToHash("isDead");
-    private static readonly int Roll = Animator.StringToHash("Roll");
+    
     protected virtual void Awake()
     {
         _characterManager = GetComponent<CharacterManager>();
@@ -28,7 +28,7 @@ public class CharacterControlAnimator : MonoBehaviour
         _renderer.GetPropertyBlock(_material);
     }
     
-    protected void UpdateAnimation(float veloX, float veloY, bool _isDead, bool isAttacking, bool isRoll = false)
+    protected void UpdateAnimation(float veloX, float veloY, bool _isDead)
     {
         if (_isDead)
         {
@@ -39,18 +39,9 @@ public class CharacterControlAnimator : MonoBehaviour
             _characterManager._animator.SetFloat(VelocityX, veloX);
             _characterManager._animator.SetFloat(VelocityZ, veloY);
             _characterManager._animator.SetBool(isFall,!_characterManager._characterController.isGrounded);
-            if (isAttacking)
-            {
-                ReceiveInput.Instance.startAttack = false;
-                _characterManager._animator.SetTrigger(Attack);
-            }
-            else if(isRoll)
-            {
-                ReceiveInput.Instance.startRoll = false;
-                _characterManager._animator.SetTrigger(Roll);
-            }
         }
     }
+    
     protected void AIUpdateAnimation(float veloX, float veloY, bool _isDead, bool isAttacking = false)
     {
         if (_isDead)
@@ -99,7 +90,11 @@ public class CharacterControlAnimator : MonoBehaviour
 
         var manager = GetComponent<AICharacterManager>();
         if(manager) manager.InitDropItem();
-        Destroy(gameObject);
+        if (gameObject.CompareTag(Constants.PlayerTag))
+        {
+            GameManager.Instance.GameOver = true;
+        }
+        else Destroy(gameObject);
     }
     
     IEnumerator MaterialAppear()
