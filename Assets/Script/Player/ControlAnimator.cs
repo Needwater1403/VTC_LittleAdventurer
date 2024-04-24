@@ -28,19 +28,29 @@ public class ControlAnimator : CharacterControlAnimator
         }
         moveAmount = ReceiveInput.Instance.moveAmount;
     }
-    private void GetAttackInputValue()
+    private void GetAttackInputValue(bool isPaused)
     {
+        if (isPaused)
+        {
+            moveAmount = 0;
+            return;
+        }
         isAttacking = ReceiveInput.Instance.startAttack;
     }
-    private void GetRollInputValue()
+    private void GetRollInputValue(bool isPaused)
     {
+        if (isPaused)
+        {
+            moveAmount = 0;
+            return;
+        }
         isRoll = ReceiveInput.Instance.startRoll;
     }
     public void HandleAllAnimation(bool isPaused)
     {
         GetMovementInputValue(isPaused);
-        GetAttackInputValue();
-        GetRollInputValue();
+        GetAttackInputValue(isPaused);
+        GetRollInputValue(isPaused);
         UpdateAnimation(0,moveAmount, isDead, isAttacking, isRoll);
         UpdateVFX();
     }

@@ -36,16 +36,14 @@ public class DamageCollider : MonoBehaviour
         if (parent.CompareTag(Constants.PlayerTag))
         {
             var _controlAnimator = parent.GetComponent<ControlAnimator>();
-            if (_controlAnimator != null)
+            if (_controlAnimator == null) return;
+            RaycastHit hit;
+            var pos = transform.position + (-_collider.bounds.extents.y) * parent.transform.up;
+            var isHit = Physics.BoxCast(pos, _collider.bounds.extents/2, parent.transform.up, out hit,
+                transform.rotation, _collider.bounds.extents.y*2 , 1 << 6);
+            if (isHit)
             {
-                RaycastHit hit;
-                var pos = transform.position + (-_collider.bounds.extents.y) * parent.transform.up;
-                var isHit = Physics.BoxCast(pos, _collider.bounds.extents/2, parent.transform.up, out hit,
-                    transform.rotation, _collider.bounds.extents.y*2 , 1 << 6);
-                if (isHit)
-                {
-                    _controlAnimator.SlashVFX(hit.point + new Vector3(0,1f,0));
-                }
+                _controlAnimator.SlashVFX(hit.point + new Vector3(0,1f,0));
             }
         }
     }

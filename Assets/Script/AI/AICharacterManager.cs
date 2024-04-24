@@ -15,7 +15,7 @@ public class AICharacterManager : CharacterManager
     [Title("Drop Item")] 
     [SerializeField] private GameObject dropItem;
     private bool isDead = false;
-    [HideInInspector] public float spawnDuration = 2f;
+    [HideInInspector] public float spawnDuration = 1.5f;
     [HideInInspector] public float spawnTimer;
     [HideInInspector] public bool isSpawn;
     public bool IsDead

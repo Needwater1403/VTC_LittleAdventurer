@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 0}
+  aggroRange: 17
   canRotate: 0
 --- !u!114 &5012755664558159892
 MonoBehaviour:

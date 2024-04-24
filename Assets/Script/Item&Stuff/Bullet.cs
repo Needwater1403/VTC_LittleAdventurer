@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     public ConfigBulletSO configBullet;
     private void FixedUpdate()
     {
-        rb.MovePosition(transform.position + transform.forward * configBullet.speed * Time.deltaTime);
+        rb.MovePosition(transform.position + transform.forward * (configBullet.speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter(Collider other)
