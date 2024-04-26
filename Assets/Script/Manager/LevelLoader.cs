@@ -27,6 +27,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int index)
     {
+        Time.timeScale = 1;
         transition.SetTrigger(start);
         StartCoroutine(Load(index));
     }

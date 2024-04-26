@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
         set => gameOver = value;
     }
 
+    private bool pauseAfterComplete;
     private void Start()
     {
-        Time.timeScale = 1;
         if (Instance == null)
         {
             Instance = this;
@@ -34,13 +34,16 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if(pauseAfterComplete) return;
         if (Player.CoinNum == 4)
         {
             Time.timeScale = 0;
             Player.Pause(true);
             UIManager.Instance.ShowWinPanel(true);
+            pauseAfterComplete = true;
         }
         if (!gameOver) return;
+        pauseAfterComplete = true;
         UIManager.Instance.ShowLosePanel(true);
         Time.timeScale = 0;  
     }

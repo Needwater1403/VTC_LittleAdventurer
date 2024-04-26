@@ -4915,6 +4915,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 8028570207988468654, guid: d032688e424605547871288e4888aff4, type: 3}
+      propertyPath: m_IgnoreReversedGraphics
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9166005853761651604, guid: d032688e424605547871288e4888aff4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6136,10 +6140,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1390590662}
   - {fileID: 314184346}
   - {fileID: 222005094}
   - {fileID: 972864581}
+  - {fileID: 1390590662}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1909702611 stripped
