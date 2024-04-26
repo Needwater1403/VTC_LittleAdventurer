@@ -10,6 +10,6 @@ public static class Constants
     
     //==============AUDIO NAME==============
     public const string Bgm = "BackgroundMusic";
-    public const string LaserGun = "LaserGun";
-    public const string LaserHit = "LaserHit";
+    public const string Blade = "Blade";
+    public const string BladeHit = "BladeHit";
 }
