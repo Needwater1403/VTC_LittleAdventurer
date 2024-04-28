@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 9121192484865100608}
   - component: {fileID: 5426404201457171075}
   - component: {fileID: 3037332546464909588}
+  - component: {fileID: 4191726553204345406}
   m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
@@ -170,7 +171,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navMeshAgent: {fileID: 0}
   aggroRange: 10
-  attackRange: 3
   canRotate: 0
 --- !u!114 &5426404201457171075
 MonoBehaviour:
@@ -191,6 +191,7 @@ MonoBehaviour:
   - {fileID: 15492800161801810}
   projectilePrefabs: {fileID: 0}
   spawnPos: {fileID: 0}
+  type: 1
 --- !u!114 &3037332546464909588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +205,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configCombat: {fileID: 11400000, guid: 7689acdf53d4a834392c29c04780ec79, type: 2}
+--- !u!114 &4191726553204345406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096356459113101518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1519b8d31aa618a4a8b611da7243bdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Slam
+    clip: {fileID: 8300000, guid: 6fc986cda13172b44afe8be1e1f9b81d, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserGun
+    clip: {fileID: 8300000, guid: f9d9135848d3bd84cb1717e40f91c1b0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BladeHit
+    clip: {fileID: 8300000, guid: 2fd97ef537c153d4fb73ef93299f12e0, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &4783843012291025202
 GameObject:
   m_ObjectHideFlags: 0

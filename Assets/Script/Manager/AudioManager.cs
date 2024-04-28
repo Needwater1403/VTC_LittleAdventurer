@@ -3,29 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using Object = System.Object;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
     public Sound[] sounds;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-            
         foreach (var s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
     }
 
     private void Start()
     {
-        PlayAudio(Constants.Bgm);
+        if (gameObject.CompareTag(Constants.ManagerTag)) PlayAudio(Constants.Bgm);
+        
     }
 
     public void PlayAudio(string name)
