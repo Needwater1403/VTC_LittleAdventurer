@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 1462454941961533016}
   - component: {fileID: 5012755664558159892}
   - component: {fileID: 1308955314645053575}
+  - component: {fileID: 171279998216975574}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Enemy
@@ -222,6 +223,7 @@ MonoBehaviour:
   colliderList: []
   projectilePrefabs: {fileID: 6393513790009742168, guid: 2643e6436d3e0b74eab02a7a583334c7, type: 3}
   spawnPos: {fileID: 875353149630112220}
+  type: 0
 --- !u!114 &1308955314645053575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configCombat: {fileID: 11400000, guid: 7689acdf53d4a834392c29c04780ec79, type: 2}
+--- !u!114 &171279998216975574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378815919791878395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1519b8d31aa618a4a8b611da7243bdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Slam
+    clip: {fileID: 8300000, guid: 6fc986cda13172b44afe8be1e1f9b81d, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserGun
+    clip: {fileID: 8300000, guid: f9d9135848d3bd84cb1717e40f91c1b0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BladeHit
+    clip: {fileID: 8300000, guid: 2fd97ef537c153d4fb73ef93299f12e0, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
 --- !u!1001 &22018840773876453
 PrefabInstance:
   m_ObjectHideFlags: 0

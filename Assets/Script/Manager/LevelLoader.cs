@@ -27,13 +27,13 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadLevel(int index)
     {
-        Time.timeScale = 1;
-        transition.SetTrigger(start);
         StartCoroutine(Load(index));
     }
 
     private IEnumerator Load(int _index)
     {
+        Time.timeScale = 1;
+        transition.SetTrigger(start);
         yield return new WaitForSeconds(transitionDuration);
         SceneManager.LoadScene(sceneBuildIndex: _index);
         yield return null;

@@ -26,8 +26,17 @@ public class DamageCollider : MonoBehaviour
                 InitSlashVFX();
                 InitBeingHitVFX(other);
                 Blink(other);
+                InitHitAudio(other);
             }        
             _controlCombat.targetList.Add(other);
+        }
+    }
+
+    private void InitHitAudio(Component other)
+    {
+        if (other.CompareTag(Constants.EnemyTag))
+        {
+            other.GetComponent<AudioManager>().PlayAudio(Constants.BladeHit);
         }
     }
 
