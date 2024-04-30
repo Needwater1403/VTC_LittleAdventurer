@@ -32,7 +32,7 @@ public class AICharacterManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        SwitchStateTo(GetState(Constants.AI_Spawn));
+        currentState = GetState(Constants.AI_Spawn);
     }
     protected override void FixedUpdate()
     {
