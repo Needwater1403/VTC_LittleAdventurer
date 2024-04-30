@@ -16,7 +16,7 @@ public class AICharacterControlMovement : CharacterControlMovement
         _player = GameManager.Instance.Player;
     }
     
-    public void HandleAIPursueMovement(Action<AIState> _test, List<AIState> _list)
+    public void HandleAIPursueMovement(Action<AIState> _test, AICharacterManager aiCharacterManager)
     {
         if(Vector3.Distance(_player.transform.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
@@ -24,29 +24,29 @@ public class AICharacterControlMovement : CharacterControlMovement
         }
         else
         {
-            _test?.Invoke(_list[2]);
+            _test?.Invoke(aiCharacterManager.GetState(Constants.AI_Attack));
         }
     }
-    public void HandleAIAggroRange(Action<AIState> _test, List<AIState> _list)
+    public void HandleAIAggroRange(Action<AIState> _test, AICharacterManager aiCharacterManager)
     {
         if (!_player.transform || _player.IsDead) return;
         if(Vector3.Distance(_player.transform.position, transform.position) <= aggroRange)
         {
-            _test?.Invoke(_list[1]);
+            _test?.Invoke(aiCharacterManager.GetState(Constants.AI_Pursue));
         }
     }
-    public void HandleAIAttackRange(Action<AIState> _test, List<AIState> _list)
+    public void HandleAIAttackRange(Action<AIState> _test, AICharacterManager aiCharacterManager)
     {
         
         if (!_player.transform || _player.IsDead)
         {
-            _test?.Invoke(_list[0]);
+            _test?.Invoke(aiCharacterManager.GetState(Constants.AI_Idle));
             return;
         }
         if(Vector3.Distance(_player.transform.position, transform.position) >= _navMeshAgent.stoppingDistance)
         {
             canRotate = false;
-            _test?.Invoke(_list[1]);
+            _test?.Invoke(aiCharacterManager.GetState(Constants.AI_Pursue));
         }
     }
     

@@ -7,7 +7,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public void OnClickStart()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 1);
+        LevelLoader.Instance.LoadLevel(1);
     }
 
     public void OnClickExit()

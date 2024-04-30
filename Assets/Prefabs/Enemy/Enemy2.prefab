@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 1462454941961533016}
   - component: {fileID: 5012755664558159892}
   - component: {fileID: 1308955314645053575}
+  - component: {fileID: 171279998216975574}
   m_Layer: 6
   m_Name: Enemy2
   m_TagString: Enemy
@@ -161,12 +162,17 @@ MonoBehaviour:
   _controlAnimator: {fileID: 6480096328054223949}
   _controlMovement: {fileID: 1462454941961533016}
   currentState: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
-  stateList:
-  - {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
-  - {fileID: 11400000, guid: 32bf6c87293f1654dbdcbcfb2cd29515, type: 2}
-  - {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
-  - {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
-  - {fileID: 11400000, guid: 143f1a6a14a2eed409e8058e37cb7c29, type: 2}
+  states:
+  - name: Spawn
+    state: {fileID: 11400000, guid: 143f1a6a14a2eed409e8058e37cb7c29, type: 2}
+  - name: Idle
+    state: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
+  - name: Pursue
+    state: {fileID: 11400000, guid: 32bf6c87293f1654dbdcbcfb2cd29515, type: 2}
+  - name: Attack
+    state: {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
+  - name: Dead
+    state: {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
   dropItem: {fileID: 4589548862031813486, guid: 057d9fc301c213745906cbee551e743a, type: 3}
   spawnDuration: 2
   spawnTimer: 0
@@ -183,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba32dbd5d0ec574daf1b8f248646a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 8951876980442960125}
   moveAmount: 0
   isAttacking: 0
   canMove: 0
@@ -222,6 +229,7 @@ MonoBehaviour:
   colliderList: []
   projectilePrefabs: {fileID: 6393513790009742168, guid: 2643e6436d3e0b74eab02a7a583334c7, type: 3}
   spawnPos: {fileID: 875353149630112220}
+  type: 0
 --- !u!114 &1308955314645053575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +243,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configCombat: {fileID: 11400000, guid: 7689acdf53d4a834392c29c04780ec79, type: 2}
+--- !u!114 &171279998216975574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7378815919791878395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1519b8d31aa618a4a8b611da7243bdfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Slam
+    clip: {fileID: 8300000, guid: 6fc986cda13172b44afe8be1e1f9b81d, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LaserGun
+    clip: {fileID: 8300000, guid: f9d9135848d3bd84cb1717e40f91c1b0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: BladeHit
+    clip: {fileID: 8300000, guid: 2fd97ef537c153d4fb73ef93299f12e0, type: 3}
+    volume: 0.5
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
 --- !u!1001 &22018840773876453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,6 +343,11 @@ Transform:
 --- !u!4 &875353149630112220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8328322251538973895, guid: d2099f505e4515644bd8be3774ed2001, type: 3}
+  m_PrefabInstance: {fileID: 22018840773876453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8951876980442960125 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8968160731924908568, guid: d2099f505e4515644bd8be3774ed2001, type: 3}
   m_PrefabInstance: {fileID: 22018840773876453}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887800454155179683

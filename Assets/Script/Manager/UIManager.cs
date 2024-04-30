@@ -55,11 +55,11 @@ public class UIManager : MonoBehaviour
 
     public void OnClickRestart()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 1);
+        LevelLoader.Instance.LoadLevel(1);
     }
     
     public void OnClickReturnToMainMenu()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 0);
+        LevelLoader.Instance.LoadLevel(0);
     }
 }

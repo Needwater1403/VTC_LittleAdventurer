@@ -9,7 +9,7 @@ public class IdleState : AIState
     {
         aiCharacterManager._controlAnimator.moveAmount = 0;
         aiCharacterManager._controlMovement.HandleAIAggroRange(aiCharacterManager.SwitchStateTo, 
-            aiCharacterManager.stateList);
+            aiCharacterManager);
         return base.Tick(aiCharacterManager);
     }
 }

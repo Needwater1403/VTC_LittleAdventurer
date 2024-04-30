@@ -12,6 +12,8 @@ public class CharacterControlCombat : MonoBehaviour
     [Title("Projectile")]
     [SerializeField] private Bullet projectilePrefabs;
     [SerializeField] private Transform spawnPos;
+
+    [Title("Enemy")] public Constants.EnemyType type;
     protected virtual void Awake()
     {
         health = GetComponent<Health>();
@@ -23,6 +25,7 @@ public class CharacterControlCombat : MonoBehaviour
     {
         targetList.Clear();
         SetCollider(true);
+        InitAttackSFX();
         if (gameObject.CompareTag(Constants.PlayerTag))
         {
             GetComponent<ControlMovement>().ResetAtkStartTime();
@@ -36,6 +39,7 @@ public class CharacterControlCombat : MonoBehaviour
 
     protected virtual void ShootBullet()
     {
+        InitAttackSFX();
         Instantiate(projectilePrefabs, spawnPos.position, transform.rotation);
     }
 
@@ -44,6 +48,24 @@ public class CharacterControlCombat : MonoBehaviour
         foreach (var dc in colliderList)
         {
             dc.GetComponent<Collider>().enabled = status;
+        }
+    }
+    private void InitAttackSFX()
+    {
+        if (gameObject.CompareTag(Constants.PlayerTag))
+        {
+           GetComponent<AudioManager>().PlayAudio(Constants.Blade);
+        }
+        else
+        {
+            if (type == Constants.EnemyType.Range)
+            {
+                GetComponent<AudioManager>().PlayAudio(Constants.LaserGun);
+            }
+            else
+            {
+                GetComponent<AudioManager>().PlayAudio(Constants.Slam);
+            }
         }
     }
 }

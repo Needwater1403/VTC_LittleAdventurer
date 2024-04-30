@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
         set => gameOver = value;
     }
 
+    private bool isPausedAfterComplete;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -34,14 +36,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Player.CoinNum == 4)
+        if (isPausedAfterComplete) return;
+        if (Player.CoinNum == 4) // WIN CONDITION (CAN CONFIG)
         {
+            isPausedAfterComplete = true;
             Time.timeScale = 0;
             Player.Pause(true);
             UIManager.Instance.ShowWinPanel(true);
         }
+
         if (!gameOver) return;
+        isPausedAfterComplete = true;
         UIManager.Instance.ShowLosePanel(true);
-        Time.timeScale = 0;  
+        Time.timeScale = 0;
     }
 }
