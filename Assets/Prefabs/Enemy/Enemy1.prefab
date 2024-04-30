@@ -128,12 +128,17 @@ MonoBehaviour:
   _controlAnimator: {fileID: 8098584107215018526}
   _controlMovement: {fileID: 9121192484865100608}
   currentState: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
-  stateList:
-  - {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
-  - {fileID: 11400000, guid: 32bf6c87293f1654dbdcbcfb2cd29515, type: 2}
-  - {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
-  - {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
-  - {fileID: 11400000, guid: 143f1a6a14a2eed409e8058e37cb7c29, type: 2}
+  states:
+  - name: Spawn
+    state: {fileID: 11400000, guid: 143f1a6a14a2eed409e8058e37cb7c29, type: 2}
+  - name: Idle
+    state: {fileID: 11400000, guid: 203646a662e1a1a41bd9fd1bd43be9f3, type: 2}
+  - name: Pursue
+    state: {fileID: 11400000, guid: 32bf6c87293f1654dbdcbcfb2cd29515, type: 2}
+  - name: Attack
+    state: {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
+  - name: Dead
+    state: {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
   dropItem: {fileID: 4589548862031813486, guid: 057d9fc301c213745906cbee551e743a, type: 3}
   spawnDuration: 2
   spawnTimer: 0
@@ -150,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba32dbd5d0ec574daf1b8f248646a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _renderer: {fileID: 130501322662973488}
   moveAmount: 0
   isAttacking: 0
   canMove: 0
@@ -506,6 +512,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 15492800161801810}
   m_SourcePrefab: {fileID: 100100000, guid: d0f0da05664b6844fa725f733e465f43, type: 3}
+--- !u!137 &130501322662973488 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5653218973031628296, guid: d0f0da05664b6844fa725f733e465f43, type: 3}
+  m_PrefabInstance: {fileID: 5745439697116065336}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &465564163421220698 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5318156139816829282, guid: d0f0da05664b6844fa725f733e465f43, type: 3}

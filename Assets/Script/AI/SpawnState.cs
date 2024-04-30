@@ -16,7 +16,7 @@ public class SpawnState : AIState
         if (aiCharacterManager.spawnTimer >= aiCharacterManager.spawnDuration)
         {
             aiCharacterManager.spawnTimer = 0;
-            aiCharacterManager.SwitchStateTo(aiCharacterManager.stateList[0]);
+            aiCharacterManager.SwitchStateTo(aiCharacterManager.GetState(Constants.AI_Idle));
         }
         return base.Tick(aiCharacterManager);
     }

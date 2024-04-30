@@ -11,7 +11,7 @@ public class PursueState : AIState
         {
             aiCharacterManager._controlAnimator.moveAmount = 1;
             aiCharacterManager._controlMovement.HandleAIPursueMovement(aiCharacterManager.SwitchStateTo,
-                aiCharacterManager.stateList);
+                aiCharacterManager);
         }
         return base.Tick(aiCharacterManager);
     }

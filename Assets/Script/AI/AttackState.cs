@@ -11,7 +11,7 @@ public class AttackState : AIState
         if(!aiCharacterManager._controlAnimator.canMove)
         {
             aiCharacterManager._controlMovement.HandleAIAttackRange(aiCharacterManager.SwitchStateTo,
-                aiCharacterManager.stateList);
+                aiCharacterManager);
         }
         // HANDLE ATTACK ANIMATION
         if(!aiCharacterManager._controlAnimator.isAttacking && aiCharacterManager._controlAnimator.canMove)

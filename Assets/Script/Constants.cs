@@ -17,6 +17,13 @@ public static class Constants
     public const string BladeHit = "BladeHit";
     public const string Slam = "Slam";
 
+    //=============AI STATE NAME=============
+    public const string AI_Spawn = "Spawn";
+    public const string AI_Idle = "Idle";
+    public const string AI_Pursue = "Pursue";
+    public const string AI_Attack = "Attack";
+    public const string AI_Dead = "Dead";
+
     public enum  EnemyType
     {
         Range, Melee

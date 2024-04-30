@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
@@ -8,12 +9,16 @@ public class AICharacterManager : CharacterManager
 {
     public AICharacterControlAnimator _controlAnimator;
     public AICharacterControlMovement _controlMovement;
+    
     [Header("Current State")] 
     [SerializeField] private AIState currentState;
+
     [Title("State List")] 
-    public List<AIState> stateList;
+    public AIStateHolder[] states;
+    
     [Title("Drop Item")] 
     [SerializeField] private GameObject dropItem;
+    
     private bool isDead = false;
     [HideInInspector] public float spawnDuration = 1.5f;
     [HideInInspector] public float spawnTimer;
@@ -27,7 +32,7 @@ public class AICharacterManager : CharacterManager
     protected override void Awake()
     {
         base.Awake();
-        currentState = stateList[4];
+        SwitchStateTo(GetState(Constants.AI_Spawn));
     }
     protected override void FixedUpdate()
     {
@@ -35,7 +40,7 @@ public class AICharacterManager : CharacterManager
         base.FixedUpdate();
         if (_controlCombat.health.CurrentHp <= 0)
         {
-            SwitchStateTo(stateList[3]);
+            SwitchStateTo(GetState(Constants.AI_Dead));
         }
         ProcessState();
     }
@@ -62,5 +67,10 @@ public class AICharacterManager : CharacterManager
     public void InitDropItem()
     {
         Instantiate(dropItem, transform.position, quaternion.identity);
+    }
+    
+    public AIState GetState(string name)
+    {
+        return Array.Find(states, stateHolder => stateHolder.name == name).state;
     }
 }
