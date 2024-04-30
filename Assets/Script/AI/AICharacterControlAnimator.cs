@@ -42,7 +42,6 @@ public class AICharacterControlAnimator : CharacterControlAnimator
     protected override void Awake()
     {
         base.Awake();
-        //_Renderer.enabled = false;
         canMove = true;
         isAttacking = false;
         isDead = false;

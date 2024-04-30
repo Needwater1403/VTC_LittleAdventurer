@@ -8,7 +8,8 @@ public class CharacterControlAnimator : MonoBehaviour
     private CharacterManager _characterManager;
     private MaterialPropertyBlock _material;
     private SkinnedMeshRenderer _renderer;
-    protected SkinnedMeshRenderer _Renderer
+    
+    public SkinnedMeshRenderer _Renderer
     {
         get => _renderer;
         set => _renderer = value;
@@ -104,7 +105,14 @@ public class CharacterControlAnimator : MonoBehaviour
         float dissolveStart = -10f;
         float dissolveEnd = 20f;
         float appear;
-        _renderer.enabled = true;
+        if(_renderer == null)
+        {
+            Debug.Log("ddddd");
+            _material = new MaterialPropertyBlock();
+            _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+            _renderer.GetPropertyBlock(_material);
+        }
+        else Debug.Log("fffff");
         _material.SetFloat("_enableDissolve",1f);
         _renderer.SetPropertyBlock(_material);
         while (time < duration)
