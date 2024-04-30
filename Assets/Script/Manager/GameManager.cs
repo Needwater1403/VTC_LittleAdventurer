@@ -37,8 +37,9 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (isPausedAfterComplete) return;
-        if (Player.CoinNum == 4)
+        if (Player.CoinNum == 4) // WIN CONDITION (CAN CONFIG)
         {
+            isPausedAfterComplete = true;
             Time.timeScale = 0;
             Player.Pause(true);
             UIManager.Instance.ShowWinPanel(true);
