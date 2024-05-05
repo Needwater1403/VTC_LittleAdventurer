@@ -8,7 +8,7 @@ public class DamageCollider : MonoBehaviour
     [SerializeField] private CharacterControlCombat _controlCombat;
     [SerializeField] private Transform parent;
     private Collider _collider;
-
+    private float _damageBonus = 0;
     private void Awake()
     {
         _collider = GetComponent<Collider>();
@@ -21,7 +21,8 @@ public class DamageCollider : MonoBehaviour
             var health = other.GetComponent<Health>();
             if (health != null)
             {
-                health.TakeDamage(_controlCombat.health.configCombat.normalATK);
+                if (parent.CompareTag(Constants.PlayerTag)) _damageBonus = GameManager.Instance.Player.DamageBonus;
+                health.TakeDamage(_controlCombat.health.configCombat.normalATK + _damageBonus);
                 Debug.Log($"<color=red>{health.gameObject.tag}</color> Current HP: {health.CurrentHp}");
                 InitSlashVFX();
                 InitBeingHitVFX(other);

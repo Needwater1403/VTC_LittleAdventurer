@@ -12,6 +12,15 @@ public class PlayerManager : CharacterManager
     public float CoinNum => coinNum;
     private bool isDead;
     public bool IsDead => isDead;
+
+    private float damageBonus;
+    public float DamageBonus
+    {
+        get => damageBonus;
+        set => damageBonus = value;
+    }
+
+    private float lastGetAttackBonusTime;
     protected override void Awake()
     {
         base.Awake();
@@ -20,6 +29,7 @@ public class PlayerManager : CharacterManager
 
     protected override void Update()
     {
+        HandleAttackBuff();
         if(isDead) return;
         base.Update();
         
@@ -55,5 +65,18 @@ public class PlayerManager : CharacterManager
     public void Pause(bool pause)
     {
         isPaused = pause;
+    }
+
+    private void HandleAttackBuff()
+    {
+        if (damageBonus == 0)
+        {
+            lastGetAttackBonusTime = Time.realtimeSinceStartup;
+            return;
+        }
+        if (Time.realtimeSinceStartup - lastGetAttackBonusTime < 5) return;
+        damageBonus = 0;
+        lastGetAttackBonusTime = Time.realtimeSinceStartup;
+        Debug.Log("ATKBuff end!");
     }
 }

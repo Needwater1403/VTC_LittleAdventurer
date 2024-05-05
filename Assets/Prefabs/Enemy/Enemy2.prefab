@@ -173,7 +173,12 @@ MonoBehaviour:
     state: {fileID: 11400000, guid: afdb3bef9f0dbc34dbc9f31484b9a1b8, type: 2}
   - name: Dead
     state: {fileID: 11400000, guid: 8aaa45c9b7e6f0b4da3324a137360f58, type: 2}
-  dropItem: {fileID: 4589548862031813486, guid: 057d9fc301c213745906cbee551e743a, type: 3}
+  dropItem:
+    list:
+    - item: {fileID: 4674276158247637864, guid: 057d9fc301c213745906cbee551e743a, type: 3}
+      rarity: 8
+    - item: {fileID: 4074923038910473708, guid: 6275ceb844dab1c4c9cbaf88a7f45c3d, type: 3}
+      rarity: 2
   spawnDuration: 2
   spawnTimer: 0
   isSpawn: 0
@@ -189,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba32dbd5d0ec574daf1b8f248646a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 8951876980442960125}
   moveAmount: 0
   isAttacking: 0
   canMove: 0
@@ -343,11 +347,6 @@ Transform:
 --- !u!4 &875353149630112220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8328322251538973895, guid: d2099f505e4515644bd8be3774ed2001, type: 3}
-  m_PrefabInstance: {fileID: 22018840773876453}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &8951876980442960125 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8968160731924908568, guid: d2099f505e4515644bd8be3774ed2001, type: 3}
   m_PrefabInstance: {fileID: 22018840773876453}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887800454155179683

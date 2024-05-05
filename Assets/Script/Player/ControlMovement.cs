@@ -15,10 +15,6 @@ public class ControlMovement : CharacterControlMovement
     private float atkStartTime = 0;
     
     private ConfigMovementSO configMovement => ConfigCenter.Instance.GetPLayerConfigMovement();
-    protected override void Awake()
-    {
-        //tf = transform;
-    }
     
     public void HandleAllMovement() //MOVEMENT BASE ON CAMERA PERSPECTIVE
     {

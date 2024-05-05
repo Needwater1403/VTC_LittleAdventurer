@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AICharacterManager : CharacterManager
 {
@@ -17,7 +18,7 @@ public class AICharacterManager : CharacterManager
     public AIStateHolder[] states;
     
     [Title("Drop Item")] 
-    [SerializeField] private GameObject dropItem;
+    [SerializeField] RarityRandomList<DropItem> dropItem;
     
     private bool isDead = false;
     [HideInInspector] public float spawnDuration = 1.5f;
@@ -66,7 +67,7 @@ public class AICharacterManager : CharacterManager
 
     public void InitDropItem()
     {
-        Instantiate(dropItem, transform.position, quaternion.identity);
+        Instantiate(dropItem.GetRandom(), transform.position, quaternion.identity);
     }
     
     public AIState GetState(string name)
